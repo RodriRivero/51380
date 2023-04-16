@@ -48,12 +48,12 @@ class ProductManager {
 
 
 
-//*************************************/
+//*******************************/
 
 // Ejemplo de uso de la clase ProductManager
 
 // Crear una instancia de ProductManager
-const productManager = new ProductManager();
+const productManager = new ProductManager ();
 
 // Agregar productos
 
