@@ -41,7 +41,7 @@ class ProductManager {
             return console.log("Searc by Id:",product) ;
         }
         else {
-            console.log(" Error: Not Found.");
+            console.log(" Error: Not Found.");//Cambiar
         }
     }
 }
