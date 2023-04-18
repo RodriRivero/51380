@@ -4,6 +4,8 @@ class ProductManager {
         this.productId = 1; // Id autoincrementable para los productos
     }
 
+
+    
     // Método para agregar un producto al arreglo de productos
     addProduct(title, description, price, thumbnail, code, stock) {
         // Validación de campos obligatorios
@@ -28,6 +30,8 @@ class ProductManager {
         this.products.push(newProduct);
         console.log("Product added successfully:", newProduct);
     }
+
+
 
     // Método para obtener todos los productos
     getProducts() {   
