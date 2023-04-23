@@ -42,10 +42,10 @@ class ProductManager {
     getProductById(id) {
         const product = this.products.find(product => product.id === id);
         if(product) {
-            return console.log("Searc by Id:",product) ;
+            return  product
         }
         else {
-            console.log(" Error: Not Found.");//Cambiar
+            return  `Error: Product with id ${id} not found .`
         }
     }
 }
@@ -70,6 +70,9 @@ productManager.addProduct("", "Descripción del producto 3", 14.99, "imagen3.jpg
 const products = productManager.getProducts();
 //console.log("All Products:", products);
 
+console.log("Searc by Id:" , productManager.getProductById(77));
+
 // Buscar producto por id
-const productById = productManager.getProductById(5);
+//const productById = productManager.getProductById(5);
 //console.log("Searc by Id");
+//console.log("Searc by Id:" , productManager.getProductById(5));
