@@ -21,7 +21,7 @@ class ProductManager {
         const existingProduct = products.find(product => product.code === code);
         if (existingProduct) {
 
-            return `Error: The product whith  code ${code} already exists.`; 
+            return `Error: The product whith code ${code} already exists.`; 
         }
 
         // Creación de nuevo producto con id autoincrementable
@@ -77,11 +77,9 @@ class ProductManager {
             };
             products[index] = updatedProduct;
             await fs.promises.writeFile(this.path, JSON.stringify(products, null, 2));
-            console.log("Product updated successfully:", updatedProduct);
-            return updatedProduct;
+            return `This product updated successfully:`, updatedProduct;
         } else {
-            console.log(`Error: Product with id ${id} not found.`);
-            return null;
+            return `Error: Product with id ${id} not found.`;
         }
     }
 
@@ -91,9 +89,8 @@ class ProductManager {
         const index = products.findIndex(product => product.id === id);
         if (index !== -1) {
             const deletedProduct = products.splice(index, 1)[0];
-            await fs.promises.writeFile(this.path, JSON.stringify(products));
-            return`Product deleted successfully:, ${deletedProduct}`;
-            return deletedProduct;
+            await fs.promises.writeFile(this.path, JSON.stringify(products, null, 2));
+            return ' This Product deleted successfully:' , deletedProduct;
         } else {
                 return `Error: Can't delete id ${id} because it doesn't exist`;
         }
@@ -124,19 +121,17 @@ const test = async () => {
     console.log(await productManager.addProduct(testProduct))
 
 
-    console.log(await productManager.getProductById(19))
-
 //Se llamará al método “updateProduct” y se intentará cambiar un campo de algún producto, se evaluará que no se elimine el id y que sí se haya hecho la actualización.
     const productOneUpdates = {
         title: "remera rosa claro ",
         description: "remera 50% de algodon"
         };
         // Actualiza el producto1
-    console.log('product update with changes' , await productManager.updateProduct(1, productOneUpdates));
-
+    console.log('product update with changes :' , await productManager.updateProduct(1, productOneUpdates));
+// genera el nuevo producto con id 
         const product2 = {
-            title: "remera rosa salmon 2",
-            description: "remera con nuevo id",
+            title: "remera rosa modelo 2",
+            description: "remera con nuevo modelo id",
             price: 3000,
             thumbnail: "Sin imagen",
             code: "0002",
@@ -145,11 +140,13 @@ const test = async () => {
 
 
     // Agrega el producto2 y espera para guardar los cambios en el archivo de datos..
-    console.log(await productManager.addProduct(product2));
+    console.log( await productManager.addProduct(product2));
 
-    console.log('Searc by Id:', await productManager.getProductById(2))
+    console.log('Searc by Id:', await productManager.getProductById(1))
+    console.log('Searc by Id:', await productManager.getProductById(19))
 
 //Se llamará al método “deleteProduct”, se evaluará que realmente se elimine el producto o que arroje un error en caso de no existir.v
-    console.log(await productManager.deleteProduct(73))
+    console.log(await productManager.deleteProduct(3))
 }
-    test();
+
+test();
