@@ -76,7 +76,7 @@ class ProductManager {
                 ...updates
             };
             products[index] = updatedProduct;
-            await fs.promises.writeFile(this.path, JSON.stringify(products));
+            await fs.promises.writeFile(this.path, JSON.stringify(products, null, 2));
             console.log("Product updated successfully:", updatedProduct);
             return updatedProduct;
         } else {
@@ -92,37 +92,66 @@ class ProductManager {
         if (index !== -1) {
             const deletedProduct = products.splice(index, 1)[0];
             await fs.promises.writeFile(this.path, JSON.stringify(products));
-            console.log("Product deleted successfully:", deletedProduct);
+            return`Product deleted successfully:, ${deletedProduct}`;
             return deletedProduct;
         } else {
-            console.log(`Error: Product with id ${id} not found.`);
-            return null;
+                return `Error: Can't delete id ${id} because it doesn't exist`;
         }
     }
 
 }
 
 
+
+//**********************TESTING******************************** */
+
+
+
 const test = async () => {
 
-    const productManager = new ProductManager('file.json');
+    const productManager = new ProductManager('file.json'); //Se creará una instancia de la clase “ProductManager”
 
-    console.log(await productManager.getProducts())
+    console.log(await productManager.getProducts()) //Se llamará “getProducts” recién creada la instancia, debe devolver un arreglo vacío []
 
-    const testProduct = {
-        title: "producto prueba",
-        description: "Este es un producto prueba 1",
-        price: 200,
+    const testProduct = {                         //Se llamará al método “addProduct” con los campos:etc.
+        title: "remera rosa",
+        description: "remera 100% de algodon",
+        price: 2000,
         thumbnail: "Sin imagen",
-        code: "abc123",
-        stock: 25
+        code: "0001",
+        stock: 10
     };
     console.log(await productManager.addProduct(testProduct))
 
-    console.log(await productManager.getProducts())
 
-    console.log(await productManager.getProductById(1))
+    console.log(await productManager.getProductById(10))
+
     console.log(await productManager.getProductById(19))
+
+
+    const productOneUpdates = {
+        title: "remera rosa claro ",
+        description: "remera 50% de algodon"
+        };
+        // Actualiza el producto1
+    console.log(await productManager.updateProduct(1, productOneUpdates));
+
+        const product2 = {
+            title: "producto prueba 2",
+            description: "Este es un producto prueba 2",
+            price: 200,
+            thumbnail: "Sin imagen",
+            code: "0002",
+            stock: 25
+            };
+
+
+    // Agrega el producto2 y espera para guardar los cambios en el archivo de datos..
+    console.log(await productManager.addProduct(product2));
+
+
+
+    console.log(await productManager.deleteProduct(73))
 
 }
     test();
