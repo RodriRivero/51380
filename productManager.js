@@ -21,7 +21,7 @@ class ProductManager {
         const existingProduct = products.find(product => product.code === code);
         if (existingProduct) {
 
-            return `Error: The product whith  code ${code} already exists.`; // pasarlo a string
+            return `Error: The product whith  code ${code} already exists.`; 
         }
 
         // Creación de nuevo producto con id autoincrementable
@@ -108,12 +108,12 @@ class ProductManager {
 
 
 const test = async () => {
-
-    const productManager = new ProductManager('file.json'); //Se creará una instancia de la clase “ProductManager”
-
-    console.log(await productManager.getProducts()) //Se llamará “getProducts” recién creada la instancia, debe devolver un arreglo vacío []
-
-    const testProduct = {                         //Se llamará al método “addProduct” con los campos:etc.
+//Se creará una instancia de la clase “ProductManager”
+    const productManager = new ProductManager('file.json'); 
+//Se llamará “getProducts” recién creada la instancia, debe devolver un arreglo vacío []
+    console.log(await productManager.getProducts()) 
+//Se llamará al método “addProduct” con los campos:etc.//El objeto debe agregarse satisfactoriamente con un id generado automáticamente SIN REPETIRSE
+    const testProduct = {                         //Se llamará al método “addProduct” con los campos:etc.//El objeto debe agregarse satisfactoriamente con un id generado automáticamente SIN REPETIRSE
         title: "remera rosa",
         description: "remera 100% de algodon",
         price: 2000,
@@ -124,34 +124,32 @@ const test = async () => {
     console.log(await productManager.addProduct(testProduct))
 
 
-    console.log(await productManager.getProductById(10))
-
     console.log(await productManager.getProductById(19))
 
-
+//Se llamará al método “updateProduct” y se intentará cambiar un campo de algún producto, se evaluará que no se elimine el id y que sí se haya hecho la actualización.
     const productOneUpdates = {
         title: "remera rosa claro ",
         description: "remera 50% de algodon"
         };
         // Actualiza el producto1
-    console.log(await productManager.updateProduct(1, productOneUpdates));
+    console.log('product update with changes' , await productManager.updateProduct(1, productOneUpdates));
 
         const product2 = {
-            title: "producto prueba 2",
-            description: "Este es un producto prueba 2",
-            price: 200,
+            title: "remera rosa salmon 2",
+            description: "remera con nuevo id",
+            price: 3000,
             thumbnail: "Sin imagen",
             code: "0002",
-            stock: 25
+            stock: 20
             };
 
 
     // Agrega el producto2 y espera para guardar los cambios en el archivo de datos..
     console.log(await productManager.addProduct(product2));
 
+    console.log('Searc by Id:', await productManager.getProductById(2))
 
-
+//Se llamará al método “deleteProduct”, se evaluará que realmente se elimine el producto o que arroje un error en caso de no existir.v
     console.log(await productManager.deleteProduct(73))
-
 }
     test();
