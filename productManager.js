@@ -1,6 +1,6 @@
-const fs = require('fs');
+import fs from 'fs';
 
-class ProductManager {
+export default class ProductManager {
     constructor(path) {
         this.productId = 1; // Id autoincrementable para los productos
         this.path = path;
@@ -16,6 +16,7 @@ class ProductManager {
             return `Error: All fields are required.`;
         }
 
+        
         // Validación de código único
         const products = await this.getProducts();
         const existingProduct = products.find(product => product.code === code);
@@ -104,14 +105,14 @@ class ProductManager {
 
 
 
-const test = async () => {
+/*const test = async () => {
 //Se creará una instancia de la clase “ProductManager”
     const productManager = new ProductManager('file.json'); 
 //Se llamará “getProducts” recién creada la instancia, debe devolver un arreglo vacío []
     console.log(await productManager.getProducts()) 
 //Se llamará al método “addProduct” con los campos:etc.//El objeto debe agregarse satisfactoriamente con un id generado automáticamente SIN REPETIRSE
     const testProduct = {                         //Se llamará al método “addProduct” con los campos:etc.//El objeto debe agregarse satisfactoriamente con un id generado automáticamente SIN REPETIRSE
-        title: "remera rosa",
+        title: "remera rosa oscura",
         description: "remera 100% de algodon",
         price: 2000,
         thumbnail: "Sin imagen",
@@ -127,7 +128,7 @@ const test = async () => {
         description: "remera 50% de algodon"
         };
         // Actualiza el producto1
-    console.log('product update with changes :' , await productManager.updateProduct(1, productOneUpdates));
+    //console.log('product update with changes :' , await productManager.updateProduct(1, productOneUpdates));
 // genera el nuevo producto con id 
         const product2 = {
             title: "remera rosa modelo 2",
@@ -140,13 +141,13 @@ const test = async () => {
 
 
     // Agrega el producto2 y espera para guardar los cambios en el archivo de datos..
-    console.log( await productManager.addProduct(product2));
+    //console.log( await productManager.addProduct(product2));
 
-    console.log('Searc by Id:', await productManager.getProductById(1))
-    console.log('Searc by Id:', await productManager.getProductById(19))
+    //console.log('Searc by Id:', await productManager.getProductById(1))
+    //console.log('Searc by Id:', await productManager.getProductById(19))
 
 //Se llamará al método “deleteProduct”, se evaluará que realmente se elimine el producto o que arroje un error en caso de no existir.v
-    console.log(await productManager.deleteProduct(3))
+    //console.log(await productManager.deleteProduct(33))
 }
 
-test();
+test();*/
