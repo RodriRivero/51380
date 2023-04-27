@@ -8,21 +8,28 @@ export default class ProductManager {
 
 
     // Método para agregar un producto al arreglo de productos
-    async addProduct(file) { 
-        const {title, description, price, thumbnail, code, stock} = file;
+    async addProduct(data) {
+        const {
+            title,
+            description,
+            price,
+            thumbnail,
+            code,
+            stock
+        } = data;
         // Validación de campos obligatorios
         if (!title || !description || !price || !thumbnail || !code || !stock) {
 
             return `Error: All fields are required.`;
         }
 
-        
+
         // Validación de código único
         const products = await this.getProducts();
         const existingProduct = products.find(product => product.code === code);
         if (existingProduct) {
 
-            return `Error: The product whith code ${code} already exists.`; 
+            return `Error: The product whith code ${code} already exists.`;
         }
 
         // Creación de nuevo producto con id autoincrementable
@@ -52,7 +59,6 @@ export default class ProductManager {
             const products = JSON.parse(fileData);
             return products
         }
-
     }
 
     // Método para buscar un producto por su id
@@ -77,8 +83,9 @@ export default class ProductManager {
                 ...updates
             };
             products[index] = updatedProduct;
-            await fs.promises.writeFile(this.path, JSON.stringify(products, null, 2));
-            return `This product updated successfully:`, updatedProduct;
+                    await fs.promises.writeFile(this.path, JSON.stringify(products, null, 2));
+            return `This product updated successfully:`,
+            updatedProduct;
         } else {
             return `Error: Product with id ${id} not found.`;
         }
@@ -91,28 +98,26 @@ export default class ProductManager {
         if (index !== -1) {
             const deletedProduct = products.splice(index, 1)[0];
             await fs.promises.writeFile(this.path, JSON.stringify(products, null, 2));
-            return ' This Product deleted successfully:' , deletedProduct;
+            return ' This Product deleted successfully:',
+            deletedProduct;
         } else {
-                return `Error: Can't delete id ${id}  doesn't exist`;
+            return `Error: Can't delete id ${id}  doesn't exist`;
         }
     }
 
 }
 
 
-
-//**********************TESTING******************************** */
-
-
+// **********************TESTING******************************** */
 
 /*const test = async () => {
 //Se creará una instancia de la clase “ProductManager”
-    const productManager = new ProductManager('file.json'); 
+    const productManager = new ProductManager('data.json'); 
 //Se llamará “getProducts” recién creada la instancia, debe devolver un arreglo vacío []
-    console.log(await productManager.getProducts()) 
+    //console.log(await productManager.getProducts()) 
 //Se llamará al método “addProduct” con los campos:etc.//El objeto debe agregarse satisfactoriamente con un id generado automáticamente SIN REPETIRSE
     const testProduct = {                         //Se llamará al método “addProduct” con los campos:etc.//El objeto debe agregarse satisfactoriamente con un id generado automáticamente SIN REPETIRSE
-        title: "remera rosa oscura",
+        title: "remera rosa oscura 1",
         description: "remera 100% de algodon",
         price: 2000,
         thumbnail: "Sin imagen",
@@ -129,7 +134,7 @@ export default class ProductManager {
         };
         // Actualiza el producto1
     //console.log('product update with changes :' , await productManager.updateProduct(1, productOneUpdates));
-// genera el nuevo producto con id 
+ //genera el nuevo producto con id 
         const product2 = {
             title: "remera rosa modelo 2",
             description: "remera con nuevo modelo id",
@@ -139,10 +144,39 @@ export default class ProductManager {
             stock: 20
             };
 
+        const product3 = {
+            title: "remera rosa modelo 3",
+            description: "remera con nuevo modelo id",
+            price: 3000,
+            thumbnail: "Sin imagen",
+            code: "0003",
+            stock: 20
+            };
+
+        const product4 = {
+            title: "remera rosa modelo 4",
+            description: "remera con nuevo modelo id",
+            price: 3000,
+            thumbnail: "Sin imagen",
+            code: "0004",
+            stock: 25
+            };    
+
+            const product5 = {
+                title: "remera roja modelo 5",
+                description: "remera con nuevo modelo id",
+                price: 3000,
+                thumbnail: "Sin imagen",
+                code: "0005",
+                stock: 25
+                }; 
+
 
     // Agrega el producto2 y espera para guardar los cambios en el archivo de datos..
-    //console.log( await productManager.addProduct(product2));
-
+    console.log( await productManager.addProduct(product2));
+    console.log( await productManager.addProduct(product3));
+    console.log( await productManager.addProduct(product4));
+    console.log( await productManager.addProduct(product5));
     //console.log('Searc by Id:', await productManager.getProductById(1))
     //console.log('Searc by Id:', await productManager.getProductById(19))
 

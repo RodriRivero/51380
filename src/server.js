@@ -1,23 +1,22 @@
 
 import express from "express";
+import ProductManager from "./components/ProductManager.js";
 
 const app = express();
-const PORT = 3000;
+const PORT = 8080;
 
 app.use(express.json());
-app.use(express.urlencoded({extends:true}));
+app.use(express.urlencoded({ extended:true }));
 
+const products = new ProductManager()
+const getProducts = products.getProducts()
 
-
-app.get("/", (req, res) => {
-  res.send("Mocchiiii");
+console.log(await getProducts)
+/*app.get("/", (req, res) => {
+res.send("Mocchiiisssssi");
 });
-
-
-
-
 
 
 app.listen(PORT, () => {
     console.log(`listening to PORT: http://localhost:${PORT}`)
-});
+});*/
