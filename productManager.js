@@ -92,7 +92,7 @@ class ProductManager {
             await fs.promises.writeFile(this.path, JSON.stringify(products, null, 2));
             return ' This Product deleted successfully:' , deletedProduct;
         } else {
-                return `Error: Can't delete id ${id} because it doesn't exist`;
+                return `Error: Can't delete id ${id}  doesn't exist`;
         }
     }
 
