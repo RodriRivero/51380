@@ -59,6 +59,7 @@ export default class ProductManager {
             const products = JSON.parse(fileData);
             return products
         }
+
     }
 
     // Método para buscar un producto por su id
@@ -83,7 +84,7 @@ export default class ProductManager {
                 ...updates
             };
             products[index] = updatedProduct;
-                    await fs.promises.writeFile(this.path, JSON.stringify(products, null, 2));
+            await fs.promises.writeFile(this.path, JSON.stringify(products, null, 2));
             return `This product updated successfully:`,
             updatedProduct;
         } else {

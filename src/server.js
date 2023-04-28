@@ -13,7 +13,7 @@ const getProducts = products.getProducts()
 
 console.log(await getProducts)
 /*app.get("/", (req, res) => {
-res.send("Mocchiiisssssi");
+res.send("Mocchhhh");
 });
 
 
