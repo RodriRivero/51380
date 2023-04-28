@@ -171,13 +171,57 @@ export default class ProductManager {
                 code: "0005",
                 stock: 25
                 }; 
-
+            const product6 = {
+                title: "remera roja modelo 6",
+                description: "remera con nuevo modelo id",
+                price: 3000,
+                thumbnail: "Sin imagen",
+                code: "0006",
+                stock: 25
+                }; 
+            const product7 = {
+                title: "remera roja modelo 7",
+                description: "remera con nuevo modelo id",
+                price: 3000,
+                thumbnail: "Sin imagen",
+                code: "0007",
+                stock: 25
+                };  
+            const product8 = {
+                title: "remera roja modelo 8",
+                description: "remera con nuevo modelo id",
+                price: 3000,
+                thumbnail: "Sin imagen",
+                code: "0008",
+                stock: 25
+                };  
+            const product9 = {
+                title: "remera roja modelo 9",
+                description: "remera con nuevo modelo id",
+                price: 3000,
+                thumbnail: "Sin imagen",
+                code: "0009",
+                stock: 25
+                };      
+            const product10 = {
+                title: "remera roja modelo 10",
+                description: "remera con nuevo modelo id",
+                price: 3000,
+                thumbnail: "Sin imagen",
+                code: "0010",
+                stock: 25
+                };  
 
     // Agrega el producto2 y espera para guardar los cambios en el archivo de datos..
     console.log( await productManager.addProduct(product2));
     console.log( await productManager.addProduct(product3));
     console.log( await productManager.addProduct(product4));
     console.log( await productManager.addProduct(product5));
+    console.log( await productManager.addProduct(product6));
+    console.log( await productManager.addProduct(product7));
+    console.log( await productManager.addProduct(product8));
+    console.log( await productManager.addProduct(product9));
+    console.log( await productManager.addProduct(product10));
     //console.log('Searc by Id:', await productManager.getProductById(1))
     //console.log('Searc by Id:', await productManager.getProductById(19))
 

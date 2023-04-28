@@ -1,7 +1,6 @@
 
 import express from "express";
 import ProductManager from "./components/ProductManager.js";
-import { async } from "rxjs";
 
 const app = express();
 const PORT = 8080;
@@ -25,8 +24,14 @@ app.get("/products/:id" , async (req, res) =>{
     let id = parseInt(req.params.id);
     let allProducts = await getProducts;
     let getProductById = allProducts.find(product => product.id === id)
-    res.send(getProductById)
-} )
+    if (getProductById){
+        return res.status(200).send(getProductById);
+    } else{
+        return res.status(400).json({
+            error:" could not find id: " + id ,
+        });
+    }    
+});
 
 
 
