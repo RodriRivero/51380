@@ -3,7 +3,7 @@ import fs from 'fs';
 export default class ProductManager {
     constructor(path) {
         this.productId = 1; // Id autoincrementable para los productos
-        this.path = path;
+        this.path = "data.json";
     }
 
 
