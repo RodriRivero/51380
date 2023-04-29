@@ -225,8 +225,8 @@ export default class ProductManager {
     //console.log('Searc by Id:', await productManager.getProductById(1))
     //console.log('Searc by Id:', await productManager.getProductById(19))
 
-//Se llamará al método “deleteProduct”, se evaluará que realmente se elimine el producto o que arroje un error en caso de no existir.v
-    //console.log(await productManager.deleteProduct(33))
+
+    
 }
 
 test();*/
