@@ -109,3 +109,124 @@ export default class ProductManager {
 }
 
 
+// **********************TESTING******************************** */
+
+/*const test = async () => {
+//Se creará una instancia de la clase “ProductManager”
+    const productManager = new ProductManager('data.json'); 
+//Se llamará “getProducts” recién creada la instancia, debe devolver un arreglo vacío []
+    //console.log(await productManager.getProducts()) 
+//Se llamará al método “addProduct” con los campos:etc.//El objeto debe agregarse satisfactoriamente con un id generado automáticamente SIN REPETIRSE
+    const testProduct = {                         //Se llamará al método “addProduct” con los campos:etc.//El objeto debe agregarse satisfactoriamente con un id generado automáticamente SIN REPETIRSE
+        title: "remera rosa oscura 1",
+        description: "remera 100% de algodon",
+        price: 2000,
+        thumbnail: "Sin imagen",
+        code: "0001",
+        stock: 10
+    };
+    console.log(await productManager.addProduct(testProduct))
+
+
+//Se llamará al método “updateProduct” y se intentará cambiar un campo de algún producto, se evaluará que no se elimine el id y que sí se haya hecho la actualización.
+    const productOneUpdates = {
+        title: "remera rosa claro ",
+        description: "remera 50% de algodon"
+        };
+        // Actualiza el producto1
+    //console.log('product update with changes :' , await productManager.updateProduct(1, productOneUpdates));
+ //genera el nuevo producto con id 
+        const product2 = {
+            title: "remera rosa modelo 2",
+            description: "remera con nuevo modelo id",
+            price: 3000,
+            thumbnail: "Sin imagen",
+            code: "0002",
+            stock: 20
+            };
+
+        const product3 = {
+            title: "remera rosa modelo 3",
+            description: "remera con nuevo modelo id",
+            price: 3000,
+            thumbnail: "Sin imagen",
+            code: "0003",
+            stock: 20
+            };
+
+        const product4 = {
+            title: "remera rosa modelo 4",
+            description: "remera con nuevo modelo id",
+            price: 3000,
+            thumbnail: "Sin imagen",
+            code: "0004",
+            stock: 25
+            };    
+
+            const product5 = {
+                title: "remera roja modelo 5",
+                description: "remera con nuevo modelo id",
+                price: 3000,
+                thumbnail: "Sin imagen",
+                code: "0005",
+                stock: 25
+                }; 
+            const product6 = {
+                title: "remera roja modelo 6",
+                description: "remera con nuevo modelo id",
+                price: 3000,
+                thumbnail: "Sin imagen",
+                code: "0006",
+                stock: 25
+                }; 
+            const product7 = {
+                title: "remera roja modelo 7",
+                description: "remera con nuevo modelo id",
+                price: 3000,
+                thumbnail: "Sin imagen",
+                code: "0007",
+                stock: 25
+                };  
+            const product8 = {
+                title: "remera roja modelo 8",
+                description: "remera con nuevo modelo id",
+                price: 3000,
+                thumbnail: "Sin imagen",
+                code: "0008",
+                stock: 25
+                };  
+            const product9 = {
+                title: "remera roja modelo 9",
+                description: "remera con nuevo modelo id",
+                price: 3000,
+                thumbnail: "Sin imagen",
+                code: "0009",
+                stock: 25
+                };      
+            const product10 = {
+                title: "remera roja modelo 10",
+                description: "remera con nuevo modelo id",
+                price: 3000,
+                thumbnail: "Sin imagen",
+                code: "0010",
+                stock: 25
+                };  
+
+    // Agrega el producto2 y espera para guardar los cambios en el archivo de datos..
+    console.log( await productManager.addProduct(product2));
+    console.log( await productManager.addProduct(product3));
+    console.log( await productManager.addProduct(product4));
+    console.log( await productManager.addProduct(product5));
+    console.log( await productManager.addProduct(product6));
+    console.log( await productManager.addProduct(product7));
+    console.log( await productManager.addProduct(product8));
+    console.log( await productManager.addProduct(product9));
+    console.log( await productManager.addProduct(product10));
+    //console.log('Searc by Id:', await productManager.getProductById(1))
+    //console.log('Searc by Id:', await productManager.getProductById(19))
+
+
+    
+}
+
+test();*/
