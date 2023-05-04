@@ -6,6 +6,7 @@ export default class ProductManager {
         this.path = "data.json";
     }
 
+    
 
     // Método para agregar un producto al arreglo de productos
     async addProduct(data) {
