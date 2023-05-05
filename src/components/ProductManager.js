@@ -1,97 +1,65 @@
-import fs from 'fs';
+import  fs from 'fs';
 import { nanoid } from 'nanoid';
 
-export default class ProductManager {
-    constructor(path) {
-        this.productId = nanoid(7); // Id autoincrementable para los productos
+
+
+class ProductManager {
+    constructor() {
         this.path = "./src/models/products.json";
     }
 
+
+    
+    async  readProducts ()  {
+    let products = await fs.promises.readFile(this.path, "utf-8");
+     let productsParse = JSON.parse(products);
+     return productsParse
+    };
     
 
-    // Método para agregar un producto al arreglo de productos
-    async addProduct(path) {
-        const {
-            title,
-            description,
-            price,
-            thumbnail,
-            code,
-            stock
-        } = path;
-        // Validación de campos obligatorios
-        if (!title || !description || !price || !thumbnail || !code || !stock) {
-
-            return `Error: All fields are required.`;
-        }
+    async writeProducts(product) {
+    await fs.promises.writeFile(this.path, JSON.stringify(product, null, 2));
+    };
 
 
-        // Validación de código único
-        const products = await this.getProducts();
-        const existingProduct = products.find(product => product.code === code);
-        if (existingProduct) {
-
-            return `Error: The product whith code ${code} already exists.`;
-        }
-
-        // Creación de nuevo producto con id autoincrementable
-        const newProduct = {
-            id: this.productId,
-            title,
-            description,
-            price,
-            thumbnail,
-            code,
-            stock
-        };
-
-        // Agregar producto al arreglo de productos
-        products.push(newProduct);
-        await fs.promises.writeFile(this.path, JSON.stringify(products, null, 2))
-        return "Product added !!"
-    }
+    async addProducts (product) {
+    let oldProducts = await this.readProducts();
+    product.id = nanoid(8)
+    let allProducts = [...oldProducts, product];
+    await this.writeProducts(allProducts)
+    return "Product Added !!"
+    };
 
 
-    // Método para obtener todos los productos
     async getProducts() {
-        if (!fs.existsSync(this.path)) {
-            return []
-        } else {
-            const data = await fs.promises.readFile(this.path, "utf-8");
-            if (data.trim().length === 0) {
-                return [];
-            }
-            const products = JSON.parse(data);
-            return products
-        }
+    return await this.readProducts();
+    };
 
-    }
-
+    
     // Método para buscar un producto por su id
     async getProductById(id) {
-        const products = await this.getProducts();
-        const product = products.find(product => product.id === id);
-        if (product) {
-            return product
-        } else {
-            return `Error: Product with id ${id} not found .`
-        }
-    }
+        let products = await this.readProducts();
+        let productById = products.find(prod => prod.id === id);
+        if (!productById) return `product with id:${id} not exist`
+            return productById
+    };
 
 
-
-    // Método para eliminar un producto por su id
+    // Método para eliminar un producto por su id y devuelve la lista sin el producto
     async deleteProduct(id) {
-        let products = await this.getProducts();
-        let existingProducts = products.some(product => product.id === id);
+        let products = await this.readProducts();
+        let existingProducts = products.some(prod => prod.id === id);
         if (existingProducts) {
-            let filterProducts = products.filter(product => product.id != id)
-            await this.addProduct(filterProducts)
+            let filterProducts = products.filter(prod => prod.id != id)
+            await this.writeProducts(filterProducts)
         return ` removed product with id : ${id} `
         }    
         return "the product to delete does not exist"
+    };
+
+
+
     }
 
-}
 
-
+export default ProductManager
