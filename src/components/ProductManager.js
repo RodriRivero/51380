@@ -10,7 +10,7 @@ export default class ProductManager {
     
 
     // Método para agregar un producto al arreglo de productos
-    async addProduct(data) {
+    async addProduct(path) {
         const {
             title,
             description,
@@ -18,7 +18,7 @@ export default class ProductManager {
             thumbnail,
             code,
             stock
-        } = data;
+        } = path;
         // Validación de campos obligatorios
         if (!title || !description || !price || !thumbnail || !code || !stock) {
 
@@ -79,23 +79,6 @@ export default class ProductManager {
     }
 
 
-    // Método para actualizar un producto por su id
-    async updateProduct(id, updates) {
-        const products = await this.getProducts();
-        const index = products.findIndex(product => product.id === id);
-        if (index !== -1) {
-            const updatedProduct = {
-                ... products[index],
-                ...updates
-            };
-            products[index] = updatedProduct;
-            await fs.promises.writeFile(this.path, JSON.stringify(products, null, 2));
-            return `This product updated successfully:`,
-            updatedProduct;
-        } else {
-            return `Error: Product with id ${id} not found.`;
-        }
-    }
 
     // Método para eliminar un producto por su id
     async deleteProduct(id) {
