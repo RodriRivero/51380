@@ -32,7 +32,7 @@ class ProductManager {
     product.id = nanoid(8)
     let allProducts = [...oldProducts, product];
     await this.writeProducts(allProducts)
-    return "Product Added !!"
+    return "Product added successfully!!"
     };
 
 
