@@ -21,6 +21,11 @@ class ProductManager {
     await fs.promises.writeFile(this.path, JSON.stringify(product, null, 2));
     };
 
+    async existProduct(id) {
+        let products = await this.readProducts();
+        return products.find(prod => prod.id === id)
+    } 
+
 
     async addProducts (product) {
     let oldProducts = await this.readProducts();
@@ -38,11 +43,20 @@ class ProductManager {
     
     // Método para buscar un producto por su id
     async getProductById(id) {
-        let products = await this.readProducts();
-        let productById = products.find(prod => prod.id === id);
+        let productById = await this.existProduct(id);
         if (!productById) return `product with id:${id} not exist`
             return productById
     };
+
+    async updateProducts (id, product){
+        let productById = await this.existProduct(id)
+        await this.deleteProduct(id)
+        let oldProducts = await this.readProducts()
+        let products = [{...product, id :id }, ...oldProducts]
+        await this.writeProducts(products)
+        return `Product with id:${id} updated successfully !`
+
+    }
 
 
     // Método para eliminar un producto por su id y devuelve la lista sin el producto
