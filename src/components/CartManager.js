@@ -1,6 +1,6 @@
 import fs from 'fs';
 import { nanoid } from "nanoid";
-import ProductManager from "/ProductManager.js"
+import ProductManager from "./ProductManager.js"
 
 
 const ProductAll = new ProductManager
@@ -38,16 +38,24 @@ class CartManager {
             return cartById
     };
 
-    async addProductInCart(carId, productId) {
-        let cartById = await this.existCart(carId)
-        if(!cartById) return `Cart does not exist with ${carId}`
+    async addProductInCart(cartId, productId) {
+        let cartById = await this.existCart(cartId)
+        if(!cartById) return `Cart does not exist with id: ${cartId}`
 
         let productById = await ProductAll.existProduct(productId)
-        if(!productById) return `Product does not exist with ${productId}`
+        if(!productById) return `Product does not exist with id: ${productId}`
 
         let cartsAll = await this.readCarts()
-        let cartFilter = cartsAll.filter(cart => cart.id !=carId)
-        let cartsConcat = [{id:carId, products : [{id:productById.id, quantity: 1}]}, ...cartFilter]
+        let cartFilter = cartsAll.filter(cart => cart.id != cartId)
+
+        if(cartById.products.some(prod => prod.id === productId)){
+        let oneMoreInCart = cartById.products.find(prod => prod.id === productId)
+        oneMoreInCart.quantity++
+        let cartsConcat = [oneMoreInCart, ...cartFilter]
+        await this.writeCarts(cartsConcat)
+        return "one more product added to the cart successfully !!"
+        }
+        let cartsConcat = [{id:cartId, products : [{id:productById.id, quantity: 1}]}, ...cartFilter]
         await this.writeCarts(cartsConcat)
         return "Product added to cart successfully!"
 
