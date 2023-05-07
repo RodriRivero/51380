@@ -1,5 +1,6 @@
 import express from "express";
 import ProductRouter from "./router/products.routes.js";
+import CartRouter from "./router/carts.routes.js";
 
 
 
@@ -11,9 +12,10 @@ app.use(express.urlencoded({ extended: true }));
 
 
 app.use("/products", ProductRouter)
+app.use("/carts", CartRouter)
 
 
-
-const server = app.listen(PORT, () => {
+        const server = app.listen(PORT, () => {
         console.log(`listening to PORT: http://localhost:${PORT}`)
 })
+

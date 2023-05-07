@@ -7,23 +7,5 @@
     "code": "01",
     "stock": 5,
     "id": "xBOt9HWA"
-  },
-  {
-    "title": "zapatillas",
-    "description": "verde",
-    "price": 50,
-    "thumbnail": "sin imagen",
-    "code": "01",
-    "stock": 5,
-    "id": "Tv-HYe9F"
-  },
-  {
-    "title": "remera",
-    "description": "verde",
-    "price": 50,
-    "thumbnail": "sin imagen",
-    "code": "01",
-    "stock": 5,
-    "id": "vxA8iftG"
   }
 ]

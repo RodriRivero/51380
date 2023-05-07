@@ -12,8 +12,8 @@ class ProductManager {
     
     async  readProducts ()  {
     let products = await fs.promises.readFile(this.path, "utf-8");
-     let productsParse = JSON.parse(products);
-     return productsParse
+    return JSON.parse(products);
+
     };
     
 
