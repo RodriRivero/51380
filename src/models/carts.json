@@ -1,21 +1,7 @@
 [
   {
-    "id": "O2Ev",
-    "products": [
-      {
-        "id": "xBOt9HWA",
-        "quantity": 1
-      }
-    ]
-  },
-  {
-    "id": "O2Ev",
-    "products": [
-      {
-        "id": "xBOt9HWA",
-        "quantity": 1
-      }
-    ]
+    "id": "xBOt9HWA",
+    "quantity": 2
   },
   {
     "id": "IBwW",
@@ -31,10 +17,6 @@
   },
   {
     "id": "iC8i",
-    "products": []
-  },
-  {
-    "id": "O2Ev",
     "products": []
   },
   {

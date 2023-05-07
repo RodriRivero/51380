@@ -46,20 +46,24 @@ class CartManager {
         if(!productById) return `Product does not exist with id: ${productId}`
 
         let cartsAll = await this.readCarts()
-        let cartFilter = cartsAll.filter(cart => cart.id != cartId)
+        let cartFilter = cartsAll.filter((cart) => cart.id != cartId)
 
-        if(cartById.products.some(prod => prod.id === productId)){
-        let oneMoreInCart = cartById.products.find(prod => prod.id === productId)
-        oneMoreInCart.quantity++
-        let cartsConcat = [oneMoreInCart, ...cartFilter]
-        await this.writeCarts(cartsConcat)
+        if(cartById.products.some((prod) => prod.id === productId)){
+        let oneMoreProductInCart = cartById.products.find((prod) => prod.id === productId);
+        oneMoreProductInCart.quantity++
+        let cartsConcat = [cartById, ...cartFilter]
+        await this.writeCarts(cartsConcat);
         return "one more product added to the cart successfully !!"
         }
-        let cartsConcat = [{id:cartId, products : [{id:productById.id, quantity: 1}]}, ...cartFilter]
+
+        cartById.products.push({id: productById.id, quantity:1})
+
+
+        let cartsConcat = [cartById, ...cartFilter]
         await this.writeCarts(cartsConcat)
         return "Product added to cart successfully!"
 
-    }
+    };
 
 }
 
