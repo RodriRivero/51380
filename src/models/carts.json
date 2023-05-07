@@ -1,30 +1,19 @@
 [
   {
+    "id": "IBwW",
+    "products": [
+      {
+        "id": "xBOt9HWA",
+        "quantity": 2
+      },
+      {
+        "id": "JHSHGq1K",
+        "quantity": 1
+      }
+    ]
+  },
+  {
     "id": "xBOt9HWA",
     "quantity": 2
-  },
-  {
-    "id": "IBwW",
-    "products": []
-  },
-  {
-    "id": "jE8k",
-    "products": []
-  },
-  {
-    "id": "oBtZ",
-    "products": []
-  },
-  {
-    "id": "iC8i",
-    "products": []
-  },
-  {
-    "id": "y54O",
-    "products": []
-  },
-  {
-    "id": "p5Vg",
-    "products": []
   }
 ]
