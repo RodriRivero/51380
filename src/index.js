@@ -11,8 +11,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
-app.use("/products", ProductRouter)
-app.use("/carts", CartRouter)
+app.use("/api/products", ProductRouter)
+app.use("/api/carts", CartRouter)
 
 
         const server = app.listen(PORT, () => {
