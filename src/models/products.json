@@ -1,20 +1,32 @@
 [
   {
-    "title": "medias rojas",
-    "description": "verde",
-    "price": 50,
-    "thumbnail": "sin imagen",
-    "code": "01",
-    "stock": 5,
-    "id": "xBOt9HWA"
+    "title": "keyboard",
+    "description": "keyboard black",
+    "code": 2,
+    "thumbnail": "https://www.daskeyboard.com/images/mactigr/MacTigr-thumb-top.jpeg",
+    "price": 7000,
+    "stock": 2,
+    "category": "electronics",
+    "id": "qbqhO1uc"
   },
   {
-    "title": "remera",
-    "description": "verde",
-    "price": 50,
-    "thumbnail": "sin imagen",
-    "code": "01",
-    "stock": 5,
-    "id": "JHSHGq1K"
+    "title": "mouse",
+    "description": "mousse black",
+    "code": 1,
+    "thumbnail": "https://jumboargentina.vtexassets.com/arquivos/ids/638501-800-600?v=637547442765130000&width=800&height=600&aspect=true",
+    "price": 5000,
+    "stock": 2,
+    "category": "electronics",
+    "id": "6lToUBBt"
+  },
+  {
+    "title": "speakers",
+    "description": "speakers black",
+    "code": 3,
+    "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_912688-MLA31588869154_072019-O.webp",
+    "price": 3000,
+    "stock": 2,
+    "category": "electronics",
+    "id": "Vv0EYjeo"
   }
 ]
