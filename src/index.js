@@ -18,4 +18,12 @@ app.use("/api/carts", CartRouter)
         const server = app.listen(PORT, () => {
         console.log(`listening to PORT: http://localhost:${PORT}`)
 })
-
+app.get("*", (req, res) =>{
+        return res.status(404).json(
+                {
+                        status: "error",
+                        msg:"the route is not implemented",
+                        data:{},
+                }
+        )
+} )

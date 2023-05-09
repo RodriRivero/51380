@@ -7,11 +7,12 @@ const CartRouter = Router()
 const carts = new CartManager
 
 CartRouter.post("/", async (req, res) => {
-    res.send(await carts.addCarts())
-})
+    res.status(200).json( {
+        status:"success",
+        msg: await carts.addCarts()})})
 
 CartRouter.get("/", async (req, res) => {
-    res.send(await carts.readCarts())
+    res.status(201).json({status:"success", data: await carts.readCarts()})
 })
 
 CartRouter.get("/:id", async (req, res) => {
