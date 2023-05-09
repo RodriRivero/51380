@@ -28,5 +28,15 @@
     "stock": 2,
     "category": "electronics",
     "id": "Vv0EYjeo"
+  },
+  {
+    "title": "monitor",
+    "description": "monitor black",
+    "code": 4,
+    "thumbnail": "https://www.lg.com/ar/images/monitores/md05871415/gallery/medium02.jpg",
+    "price": 9000,
+    "stock": 2,
+    "category": "electronics",
+    "id": "r6UnMmrI"
   }
 ]

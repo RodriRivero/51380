@@ -12,7 +12,7 @@ CartRouter.post("/", async (req, res) => {
         msg: await carts.addCarts()})})
 
 CartRouter.get("/", async (req, res) => {
-    res.status(201).json({status:"success", data: await carts.readCarts()})
+    res.status(201).json({status:"success", payloads: await carts.readCarts()})
 })
 
 CartRouter.get("/:id", async (req, res) => {

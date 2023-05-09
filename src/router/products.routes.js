@@ -7,7 +7,10 @@ const product = new ProductManager();
 ProductRouter.get("/", async (req, res) => {
     let limit = parseInt(req.query.limit);
     if (! limit) 
-        return res.send(await product.getProducts())
+        return res.json({
+            status: "success",
+            msg:"list of all products",
+            data:await product.getProducts()})
     
     let allProducts = await product.getProducts();
     let productLimit = allProducts.slice(0, limit)
@@ -20,22 +23,33 @@ ProductRouter.get("/:id", async (req, res) => {
     let allProducts = await product.readProducts();
     let getProductById = allProducts.find(product => product.id === id)
     if (getProductById) {
-        return res.status(200).send(await product.getProductById(id));
+        return res.status(200).json({
+            status: "success",
+            msg: "product obtained by id: " + id,
+            data:await product.getProductById(id),
+        })
     } else {
         return res.status(400).json({
-            error: " could not find id: " + id
+            status: "error",
+            msg: "error:  could not find id: " + id,
+            data:{},
         });
     }
 });
 
 ProductRouter.post("/", async (req, res) => {
 let newProduct = req.body
-    res.status(200).send(await product.addProducts(newProduct))
+    res.status(201).json({
+            status: "success",
+            msg:await product.addProducts(newProduct)
+        })
 })
 
 ProductRouter.delete("/:id", async (req, res) => {
     let id = req.params.id
-    res.status(200).send( await product.deleteProduct(id))
+    res.status(200).json({
+            status:"success",
+            msg:await product.deleteProduct(id)})
 })
 
 ProductRouter.put("/:id", async (req, res) => {
