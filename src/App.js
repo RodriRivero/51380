@@ -1,12 +1,12 @@
 import express from "express";
 import ProductRouter from "./router/products.routes.js";
 import CartRouter from "./router/carts.routes.js";
-import {Server} from "socket.io";
-import {testSocketRouter} from "./router/test.socket.routes.js";
 import handlebars from "express-handlebars";
 import path from "path";
 import {__dirname} from "./utils.js";
 import { initSockets } from "./socket/socketServer.js";
+import viewRouter from "./router/view.routes.js"
+import apiRouter from "./router/api.routes.js"
 
 
 const app = express();
@@ -22,6 +22,10 @@ app.set("view engine", "handlebars");
 
 app.use(express.static(path.join(__dirname, "public")));
 
+
+app.use('/api', apiRouter)
+app.use('/', viewRouter)
+
 app.use("/api/products", ProductRouter)
 app.use("/api/carts", CartRouter)
 
@@ -31,10 +35,6 @@ const httpServer = app.listen(PORT, () => {
 
 
 initSockets(httpServer)
-
-
-
-app.use("/test-socket", testSocketRouter);
 
 
 app.get("*", (req, res) => {
