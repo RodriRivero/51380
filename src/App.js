@@ -38,5 +38,7 @@ initSockets(httpServer)
 
 
 app.get("*", (req, res) => {
-    return res.status(404).json({status: "error", msg: "the route is not implemented", data: {}})
+    return res.status(404).json({status: "error",
+        msg: "the route is not implemented", 
+        data: {}})
 })
