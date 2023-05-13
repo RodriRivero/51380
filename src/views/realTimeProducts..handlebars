@@ -1,0 +1,80 @@
+<h1 style="text-align: center;" class="mt-2">Lista de Productos con Socket</h1>
+<h2 style="text-align: center">Agregar un Producto</h2>
+<div style="position: relative; border: 3px solid rgb(92, 0, 0); width: 90%; left: 5%; border-radius: 10px">
+  <form id="formProducts" action="/realtimeproducts" method="POST">
+    <div class="mx-2 mb-4">
+      <label for="exampleTitle" class="form-label fw-bold">Title</label>
+      <input type="text" class="form-control" id="inputTitle" placeholder="Title of Product" aria-describedby="emailHelp">
+    </div>
+    <div class="mx-2 mb-4">
+      <label for="exampleDescription" class="form-label fw-bold">Description</label>
+      <input type="text" class="form-control" id="inputDesciption" placeholder="A little description of your product">
+    </div>
+    <div class="mx-2 mb-4">
+      <label for="examplePrice" class="form-label fw-bold">Price</label>
+      <input type="number" class="form-control  " id="inputPrice" placeholder="Insert the price">
+    </div>
+    <div class="mx-2 mb-4">
+      <label for="exampleImage" class="form-label fw-bold">Image</label>
+      <input type="file" class="form-control" id="inputThumbnail" placeholder="Select an image">
+    </div>
+    <div class="mx-2 mb-4">
+      <label for="exampleCode" class="form-label fw-bold">Code number</label>
+      <input type="number" class="form-control" id="inputCode" placeholder="Insert code number">
+    </div>
+    <div class="mx-2 mb-4">
+      <label for="exampleStock" class="form-label fw-bold">Stock Quantity</label>
+      <input type="number" class="form-control" id="inputStock" placeholder="Insert stock">
+    </div>
+    <button type="submit" class="btn btn-primary position-relative start-50 top-0 translate-middle-x mb-2" id="buttonForm">Submit</button>
+  </form>
+</div>
+
+<ul id="ulContainer" style="display: flex; justify-content: space-between; flex-wrap: wrap; width: 80%; position: relative; left: 10%;" >
+  {{#each products as |product|}}
+  <li style="display: inline">
+    <div  class="card my-2 mx-2" style="width: 18rem; flex-grow: 1;">
+    <img src="{{product.thumbnails}}" class="card-img-top" alt="Imagen ilustrativa" id="imageRealTime">
+    <div class="card-body">
+      <h5 class="card-title text-center" id="titleRealTime">{{product.title}}</h5>
+      <p class="card-text text-center" id="descRealTime">{{product.desc}}</p>
+      <p class="card-text text-center pb-2" id="priceRealTime">Price: ${{product.price}}</p>
+      <a href="socket" class="btn btn-secondary position-relative start-50 top-0 translate-middle">Buy</a>
+    </div>
+  </div>
+  </li>
+  {{/each}}
+</ul>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  const socket = io()
+  socket.on('newProduct', product => {
+    const divContainer = document.getElementById('ulContainer')
+
+    const li = document.createElement('li')
+    li.innerHTML = 
+    `<div  class="card my-2 mx-2" style="width: 18rem; flex-grow: 1;">
+      <img src="${product.thumbnails}" class="card-img-top" alt="Imagen ilustrativa" id="imageRealTime">
+      <div class="card-body">
+        <h5 class="card-title text-center" id="titleRealTime">${product.title}</h5>
+        <p class="card-text text-center" id="descRealTime">${product.desc}</p>
+        <p class="card-text text-center pb-2" id="priceRealTime">Price: $${product.price}</p>
+        <a href="socket" class="btn btn-secondary position-relative start-50 top-0 translate-middle">Buy</a>
+      </div>
+    </div>`
+  ulContainer.appendChild(li)
+  })
+
+  const formProduct = document.getElementById('formProducts')
+
+  formProduct.addEventListener('submit', async (event) => {
+    event.preventDefault()
+    console.log('Se hizo click')
+    const formData = new FormData(formProduct)
+    const data = Object.fromEntries(formData.entries())
+    console.log(formData.entries())
+
+    socket.emit('createProduct', data)
+    formProduct.reset()
+  })
+</script>
