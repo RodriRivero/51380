@@ -4,8 +4,8 @@ import ProductManager from "../components/ProductManager.js";
 
 export const initSockets = (server) => {
     const ioServer = new Server(server)
-    ioServer.on ('connection', (Socket) => {
-        console.log(`new client connected with id: ${Socket.id}`)
+    ioServer.on('connection', (socket) => {
+        console.log('Nuevo cliente conectado con id: ' + socket.id)
 
         Socket.on('createProduct', data => {
             console.log(data)
@@ -13,4 +13,4 @@ export const initSockets = (server) => {
             ioServer.emit('newProduct', newProduct)
         })
     })
-}
+} 

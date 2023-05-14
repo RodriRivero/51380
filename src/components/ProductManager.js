@@ -28,7 +28,7 @@ class ProductManager {
 
 
     async addProducts (product) {
-    let oldProducts = await this.readProducts();
+    let oldProducts = await this.readProducts();//loaddata
     product.id = nanoid(8)
     let allProducts = [...oldProducts, product];
     await this.writeProducts(allProducts)

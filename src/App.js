@@ -1,10 +1,10 @@
 import express from "express";
-import ProductRouter from "./router/products.routes.js";
-import CartRouter from "./router/carts.routes.js";
+//import ProductRouter from "./router/products.routes.js";
+//import CartRouter from "./router/carts.routes.js";
 import handlebars from "express-handlebars";
 import path from "path";
 import {__dirname} from "./utils.js";
-import { initSockets } from "./socket/socketServer.js";
+import {initSockets} from "./socket/socketServer.js";
 import viewRouter from "./router/view.routes.js"
 import apiRouter from "./router/api.routes.js"
 
@@ -26,8 +26,8 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use('/api', apiRouter)
 app.use('/', viewRouter)
 
-app.use("/api/products", ProductRouter)
-app.use("/api/carts", CartRouter)
+//app.use("/api/products", ProductRouter)
+//app.use("/api/carts", CartRouter)
 
 const httpServer = app.listen(PORT, () => {
     console.log(`listening to PORT: http://localhost:${PORT}`)

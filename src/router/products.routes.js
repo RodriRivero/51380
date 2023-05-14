@@ -1,5 +1,6 @@
 import { Router } from "express"; 
 import ProductManager from "../components/ProductManager.js";
+import { uploader } from "../utils.js";
 
 
 
@@ -39,13 +40,36 @@ ProductRouter.get("/:id", async (req, res) => {
     }
 });
 
-ProductRouter.post("/", async (req, res) => {
+/*ProductRouter.post("/", async (req, res) => {
 let newProduct = req.body;
     res.status(201).json({
             status: "success",
             msg:await product.addProducts(newProduct)
         })
-})
+})*/
+
+ProductRouter.post('/', uploader.single('thumbnails'), async (req, res) => {
+    const productToAdd = req.body
+    if (req.file) {
+      productToAdd.thumbnails = `/thumbnails/${req.file.filename}`
+    } else {
+      productToAdd.thumbnails = '/thumbnails/placeholder.png'
+    }
+    const product = await ProductManager.addProducts(productToAdd)
+    if (!product) {
+      res.status(200).json({
+        status: true,
+        message: 'Product succesfully added'
+      })
+    } else {
+      res.status(409).json({ error: product })
+    }
+  })
+
+
+
+
+
 
 ProductRouter.delete("/:id", async (req, res) => {
     let id = req.params.id
