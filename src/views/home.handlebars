@@ -2,9 +2,9 @@
 <div style="display: flex; flex-wrap: wrap; width: 90%; position: relative; left: 5%;" >
   {{#each products as |product|}}
   <div class="card my-2 mx-2" style="width: 18rem; flex-grow: 1;">
-    <img src="{{product.thumbnails}}" class="card-img-top" alt="Imagen ilustrativa">
+    <img src="{{product}}" class="card-img-top" alt="Imagen ilustrativa">
     <div class="card-body">
-      <h5 class="card-title text-center">{{product.title}}</h5>
+      <h5 class="card-title text-center">{{product}}</h5>
       <p class="card-text text-center">{{product.desc}}</p>
       <p class="card-text text-center pb-2">Price: ${{product.price}}</p>
       <a href="socket" class="btn btn-secondary position-relative start-50 top-0 translate-middle">Buy</a>
@@ -12,3 +12,8 @@
   </div>
   {{/each}}
 </div>
+<script src="/socket.io/socket.io.min.js"></script>
+<script src="./main.js"></script>
+<script>
+    const socket = io()
+</script>

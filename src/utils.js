@@ -1,8 +1,10 @@
 import multer from "multer";
+import { fileURLToPath } from "url";
+import path from "path";
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, path.join(__dirname, "public"));
+        cb(null, 'public');
     },
     filename: (req, file, cb) => {
         cb(null, file.originalname);
@@ -11,8 +13,5 @@ const storage = multer.diskStorage({
 
 export const uploader = multer({storage});
 
-// https://flaviocopes.com/fix-dirname-not-defined-es-module-scope/
-import path from "path";
-import {fileURLToPath} from "url";
 export const __filename = fileURLToPath(import.meta.url);
 export const __dirname = path.dirname(__filename);

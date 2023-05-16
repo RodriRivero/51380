@@ -27,13 +27,38 @@ class ProductManager {
     } 
 
 
-    async addProducts (product) {
+   /* async addProducts (product) {
     let oldProducts = await this.readProducts();//loaddata
     product.id = nanoid(8)
     let allProducts = [...oldProducts, product];
     await this.writeProducts(allProducts)
     return "Product added successfully!!"
-    };
+    };*/
+
+    async addProduct (product) {
+        await this.readProducts()
+        const verify = this.products.find((cod) => cod.code === product.code)
+        if (verify !== undefined) {
+          return ('Product code already exists. Try with another code')
+        }
+        if (!product.title ||
+                !product.desc ||
+                !product.price ||
+                !product.code ||
+                !product.stock) {
+          return ('You must to complete all the fields')
+        }
+        product.price = parseFloat(product.price)
+        product.stock = parseInt(product.stock)
+        product.code = parseInt(product.code)
+        this.products.push({ id: nanoid(8), ...product, status: product.status ?? true })
+        await fs.promises.writeFile(this.path, JSON.stringify(this.products, null, 2))
+      }
+
+
+
+
+
 
 
     async getProducts() {

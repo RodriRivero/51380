@@ -1,13 +1,13 @@
 import { Router } from "express"; 
 import ProductManager from "../components/ProductManager.js";
-import { uploader } from "../utils.js";
+//import { uploader } from "../utils.js";
 
 
 
-const ProductRouter = Router()
+const router = Router()
 const product = new ProductManager();
 
-ProductRouter.get("/", async (req, res) => {
+router.get("/", async (req, res) => {
     let limit = parseInt(req.query.limit);
     if (! limit) 
         return res.json({
@@ -21,7 +21,7 @@ ProductRouter.get("/", async (req, res) => {
     res.send(productLimit)
 });
 
-ProductRouter.get("/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {
     let id = req.params.id;
     let allProducts = await product.readProducts();
     let getProductById = allProducts.find(product => product.id === id)
@@ -40,15 +40,15 @@ ProductRouter.get("/:id", async (req, res) => {
     }
 });
 
-/*ProductRouter.post("/", async (req, res) => {
+router.post("/", async (req, res) => {
 let newProduct = req.body;
     res.status(201).json({
             status: "success",
-            msg:await product.addProducts(newProduct)
+            msg:await product.addProduct(newProduct)
         })
-})*/
+})
 
-ProductRouter.post('/', uploader.single('thumbnails'), async (req, res) => {
+/*router.post('/', uploader.single('thumbnails'), async (req, res) => {
     const productToAdd = req.body
     if (req.file) {
       productToAdd.thumbnails = `/thumbnails/${req.file.filename}`
@@ -64,25 +64,25 @@ ProductRouter.post('/', uploader.single('thumbnails'), async (req, res) => {
     } else {
       res.status(409).json({ error: product })
     }
-  })
+  })*/
 
 
 
 
 
 
-ProductRouter.delete("/:id", async (req, res) => {
+  router.delete("/:id", async (req, res) => {
     let id = req.params.id
     res.status(200).json({
             status:"success",
             msg:await product.deleteProduct(id)})
 })
 
-ProductRouter.put("/:id", async (req, res) => {
+router.put("/:id", async (req, res) => {
     let id = req.params.id;
     let updateProducts = req.body;
     res.send( await product.updateProducts(id, updateProducts));
         
 })
 
-export default ProductRouter
+export default router
