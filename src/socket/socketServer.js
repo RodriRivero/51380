@@ -8,7 +8,7 @@ export const initSockets = (server) => {
 
     socket.on('createProduct', data => {
       console.log(data)
-      const newProduct = ProductManager.addProducts(data)
+      const newProduct = ProductManager.addProduct(data)
       ioServer.emit('newProduct', newProduct)
     })
   })

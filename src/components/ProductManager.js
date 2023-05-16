@@ -1,104 +1,92 @@
-import  fs from 'fs';
-import { nanoid } from 'nanoid';
+import fs from 'fs'
+import { nanoid } from 'nanoid'
 
+export class ProductManager {
+  // static #id = 0
+  constructor (path) {
+    this.products = []
+    this.path = path
+  }
 
+  async loadData () {
+    if (!fs.existsSync(this.path)) {
+      await fs.promises.writeFile(this.path, JSON.stringify(this.products))
+    } else {
+      this.products = JSON.parse(await fs.promises.readFile(this.path, 'utf-8'))
+      // ProductManager.#id = this.products[this.products.length - 1]?.id || 0
+    }
+  }
 
-class ProductManager {
-    constructor() {
-        this.path = "./src/models/products.json";
+  async addProduct (product) {
+    await this.loadData()
+    const verify = this.products.find((cod) => cod.code === product.code)
+    if (verify !== undefined) {
+      return ('Product code already exists. Try with another code')
+    }
+    if (!product.title ||
+            !product.desc ||
+            !product.price ||
+            !product.code ||
+            !product.stock) {
+      return ('You must to complete all the fields')
+    }
+    product.price = parseFloat(product.price)
+    product.stock = parseInt(product.stock)
+    product.code = parseInt(product.code)
+    this.products.push({ id: nanoid(), ...product, status: product.status ?? true })
+    await fs.promises.writeFile(this.path, JSON.stringify(this.products, null, 2))
+  }
+
+  async getProducts () {
+    await this.loadData()
+    return this.products.length > 0 ? this.products : 'There are no products in DB'
+  };
+
+  async getProductsById (id) {
+    await this.loadData()
+    const findIndex = this.products.find((p) => p.id === id)
+    if (findIndex) {
+      return findIndex
+    } else {
+      throw new Error(`Product not found by id: ${id}`)
+    }
+  }
+
+  async updateProduct (id, product) {
+    await this.loadData()
+    const searchProduct = this.products.findIndex((p) => p.id === id)
+
+    if (searchProduct === -1) {
+      return (`Product not found by id: ${id}`)
+    };
+
+    if (!product.title ||
+            !product.desc ||
+            !product.price ||
+            !product.code ||
+            !product.stock) {
+      return ('You must to complete all the fields')
     }
 
-
-    
-    async  readProducts ()  {
-    let products = await fs.promises.readFile(this.path, "utf-8");
-    return JSON.parse(products);
-
-    };
-    
-
-    async writeProducts(product) {
-    await fs.promises.writeFile(this.path, JSON.stringify(product, null, 2));
-    };
-
-    async existProduct(id) {
-        let products = await this.readProducts();
-        return products.find(prod => prod.id === id)
-    } 
-
-
-   /* async addProducts (product) {
-    let oldProducts = await this.readProducts();//loaddata
-    product.id = nanoid(8)
-    let allProducts = [...oldProducts, product];
-    await this.writeProducts(allProducts)
-    return "Product added successfully!!"
-    };*/
-
-    async addProduct (product) {
-        await this.readProducts()
-        const verify = this.products.find((cod) => cod.code === product.code)
-        if (verify !== undefined) {
-          return ('Product code already exists. Try with another code')
-        }
-        if (!product.title ||
-                !product.desc ||
-                !product.price ||
-                !product.code ||
-                !product.stock) {
-          return ('You must to complete all the fields')
-        }
-        product.price = parseFloat(product.price)
-        product.stock = parseInt(product.stock)
-        product.code = parseInt(product.code)
-        this.products.push({ id: nanoid(8), ...product, status: product.status ?? true })
-        await fs.promises.writeFile(this.path, JSON.stringify(this.products, null, 2))
-      }
-
-
-
-
-
-
-
-    async getProducts() {
-    return await this.readProducts();
-    };
-
-    
-    // Método para buscar un producto por su id
-    async getProductById(id) {
-        let productById = await this.existProduct(id);
-        if (!productById) return `product with id:${id} not exist`
-            return productById
-    };
-
-    async updateProducts (id, product){
-        let productById = await this.existProduct(id)
-        await this.deleteProduct(id)
-        let oldProducts = await this.readProducts()
-        let products = [{...product, id :id }, ...oldProducts]
-        await this.writeProducts(products)
-        return `Product with id:${id} updated successfully !`
-
+    this.products[searchProduct].code = ''
+    const verifyCode = this.products.find((cod) => cod.code === product.code)
+    if (verifyCode !== undefined) {
+      return ('Product code already exists')
     }
 
+    this.products.splice(searchProduct, 1, { id, ...product })
+    await fs.promises.writeFile(this.path, JSON.stringify(this.products, null, 2))
+  }
 
-    // Método para eliminar un producto por su id y devuelve la lista sin el producto
-    async deleteProduct(id) {
-        let products = await this.readProducts();
-        let existingProducts = products.some(prod => prod.id === id);
-        if (existingProducts) {
-            let filterProducts = products.filter(prod => prod.id != id)
-            await this.writeProducts(filterProducts)
-        return ` removed product with id : ${id} `
-        }    
-        return "the product to delete does not exist"
-    };
-
-
-
+  async deleteProduct (id) {
+    await this.loadData()
+    const productIndex = this.products.findIndex(p => p.id === id)
+    if (productIndex === -1) {
+      return (`Product not found by id: ${id}`)
     }
+    this.products.splice(productIndex, 1)
+    await fs.promises.writeFile(this.path, JSON.stringify(this.products, null, 2))
+  }
+}
 
-
-export default ProductManager
+export default new ProductManager('./src/models/products.json')

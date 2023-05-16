@@ -1,28 +1,61 @@
-import { Router } from "express";
-import CartManager from "../components/CartManager.js";
-
-
+import { Router } from 'express'
+import cartManager from '../components/CartManager.js'
 
 const router = Router()
-const carts = new CartManager
 
-router.post("/", async (req, res) => {
-    res.status(200).json( {
-        status:"success",
-        msg: await carts.addCarts()})})
-
-router.get("/", async (req, res) => {
-    res.status(201).json({status:"success", payloads: await carts.readCarts()})
+router.post('/', async (req, res) => {
+  try {
+    const cart = await cartManager.createCart()
+    res.status(201).json({
+      message: 'Cart created succesfully',
+      cart
+    })
+  } catch (error) {
+    res.status(400).json({
+      error: 'Error creating cart'
+    })
+  }
 })
 
-router.get("/:id", async (req, res) => {
-    res.send(await carts.getCartById(req.params.id))
+router.get('/:cid', async (req, res) => {
+  const { cid } = req.params
+  try {
+    const cart = await cartManager.getCartById(cid)
+    res.status(200).json(cart.products)
+  } catch (error) {
+    res.status(400).json({
+      error: 'Cart not found'
+    })
+  }
 })
 
-router.post("/:cid/products/:pid", async (req, res ) => {
-    let carId = req.params.cid
-    let productId = req.params.pid
-    res.send(await carts.addProductInCart(carId, productId))
+router.put('/:cid/:pid', async (req, res) => {
+  const { cid, pid } = req.params
+  try {
+    const productToAdd = await cartManager.addProductsToCart(cid, pid)
+    res.status(200).json({
+      success: true,
+      productToAdd
+    })
+  } catch (error) {
+    res.status(400).json({
+      message: 'Cart or product id not found'
+    })
+  }
+})
+router.delete('/:cid', async (req, res) => {
+  const { cid } = req.params
+  try {
+    await cartManager.deleteCart(cid)
+    res.status(200).json({
+      success: true,
+      message: 'Cart deleted succesfully'
+    })
+  } catch (error) {
+    res.status(400).json({
+      error: 'An error ocurred'
+    })
+  }
 })
 
 export default router

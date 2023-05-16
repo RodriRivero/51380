@@ -2,10 +2,11 @@
     "name": "51380-rivero",
     "version": "1.0.0",
     "description": "",
-    "main": "src/App.js",
+    "main": "server.js",
     "type": "module",
     "scripts": {
-        "start": "nodemon src/App.js"
+        "start":"node src/server.js",
+        "dev": "nodemon src/server.js"
     },
     "repository": {
         "type": "git",
