@@ -2,7 +2,7 @@ import fs from 'fs'
 import { nanoid } from 'nanoid'
 
 export class ProductManager {
-  // static #id = 0
+
   constructor (path) {
     this.products = []
     this.path = path
@@ -13,7 +13,7 @@ export class ProductManager {
       await fs.promises.writeFile(this.path, JSON.stringify(this.products))
     } else {
       this.products = JSON.parse(await fs.promises.readFile(this.path, 'utf-8'))
-      // ProductManager.#id = this.products[this.products.length - 1]?.id || 0
+
     }
   }
 

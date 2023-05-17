@@ -18,7 +18,7 @@ app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'handlebars')
 
 // MULTER
-app.use(express.static(__dirname + 'src/public'));
+app.use(express.static(__dirname + '/public'));
 
 app.use('/api', apiRouter)
 app.use('/', viewRouter)
@@ -26,12 +26,7 @@ app.use('/', viewRouter)
 const httpServer = app.listen(PORT, () => {
     console.log(`Server up and running on port http://localhost:${PORT}`)
 })
-
 // SOCKET IO
 initSockets(httpServer)
 
-/*app.get("*", (req, res) => {
-    return res.status(404).json({status: "error",
-        msg: "the route is not implemented", 
-        data: {}})
-})*/
+

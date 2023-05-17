@@ -35,7 +35,7 @@ router.get('/:pid', async (req, res) => {
   }
 })
 
-router.post('/', uploader.single('thumbnails'), async (req, res) => {
+router.post('/realtimeproducts', uploader.single('thumbnails'), async (req, res) => {
   const productToAdd = req.body
   if (req.file) {
     productToAdd.thumbnails = `/thumbnails/${req.file.filename}`
