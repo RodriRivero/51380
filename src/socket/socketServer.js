@@ -8,7 +8,7 @@ export const initSockets = (server) => {
 
     socket.on('createProduct', async (data) => {
       try {
-        const newProduct = await productManager.addProduct(data)
+        const newProduct = await ProductManager.addProduct(data)
         ioServer.emit('newProduct', newProduct)
         socket.emit('messageSuccess', 'Producto creado con éxito')
       } catch (err) {
@@ -19,7 +19,7 @@ export const initSockets = (server) => {
     socket.on('deleteProduct', async (idProduct) => {
       try {
         console.log(idProduct)
-        await productManager.deleteProduct(idProduct)
+        await ProductManager.deleteProduct(idProduct)
         const productsRefresh = await productManager.getProducts()
         ioServer.emit('refreshPage', productsRefresh)
       } catch (err) {
