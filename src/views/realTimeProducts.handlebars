@@ -1,139 +1,136 @@
-
-<div   class="container h-100 mt-3">
+<div class="container h-100 mt-3">
     <div class="row">
         <div class="col-md-3 my-auto">
-            <form id="formProducts" action="/realtimeproducts" method="POST" class="card card-body rounded-4">
+            <form id="formProducts" action="/api/products" method="POST" class="card card-body rounded-4">
                 <h2 class="h2 mb-4">Add a Product</h2>
-                    <label for="exampleTitle" class="form-label fw-bold">Title</label>
-                    <input type="text" class="form-control rounded-4" id="inputTitle" placeholder="Title of Product" aria-describedby="emailHelp">
+                <label for="exampleTitle" class="form-label fw-bold">Title</label>
+                <input type="text" class="form-control rounded-4" id="inputTitle" placeholder="Title of Product" aria-describedby="emailHelp">
 
                     <label for="exampleDescription" class="form-label fw-bold rounded-4">Description</label>
                     <input type="text" class="form-control rounded-4" id="inputDescription" placeholder="A little description of your product">
 
-                    <label for="examplePrice" class="form-label fw-bold rounded-4">Price</label>
-                    <input type="number" class="form-control rounded-4 " id="inputPrice" placeholder="Insert the price">
+                        <label for="examplePrice" class="form-label fw-bold rounded-4">Price</label>
+                        <input type="number" class="form-control rounded-4 " id="inputPrice" placeholder="Insert the price">
 
-                    <label for="exampleImage" class="form-label fw-bold rounded-4">Image</label>
-                    <input type="text" class="form-control rounded-4" id="inputThumbnail" placeholder="Select a URL">
+                            <label for="exampleImage" class="form-label fw-bold rounded-4">Image</label>
+                            <input type="text" class="form-control rounded-4" id="inputThumbnail" placeholder="Select a URL">
 
-                    <label for="exampleCode" class="form-label fw-bold rounded-4">Code number</label>
-                    <input type="number" class="form-control rounded-4" id="inputCode" placeholder="Insert code number">
+                                <label for="exampleCode" class="form-label fw-bold rounded-4">Code number</label>
+                                <input type="number" class="form-control rounded-4" id="inputCode" placeholder="Insert code number">
 
-                    <label for="exampleStock" class="form-label fw-bold rounded-4">Stock Quantity</label>
-                    <input type="number" class="form-control mb-3 rounded-4 " id="inputStock" placeholder="Insert stock">
+                                    <label for="exampleStock" class="form-label fw-bold rounded-4">Stock Quantity</label>
+                                    <input type="number" class="form-control mb-3 rounded-4 " id="inputStock" placeholder="Insert stock">
 
-                <button  type="submit" class="btn btn-success  rounded-4" id="buttonForm">Added</button>
-            </form>
-            
-        </div>
-            <div class="col-md-9" id="ulContainer">
-      <!-- Divs generados dinámicamente se agregarán aquí -->
-    </div>
-    </div>
-</div>
+                                        <button type="submit" class="btn btn-success  rounded-4" id="buttonForm">Added</button>
+                                    </form>
+                                        <h5 id="errorAlert" style="text-align: center;"></h5>
+                                </div>
+                                <div
+                                    class="col-md-9" id="ulContainer"><!-- Divs generados dinámicamente se agregarán aquí -->
+                                </div>
+                            </div>
+                        </div>
 
 
-<script src="/socket.io/socket.io.js"></script>
+                        <script src="/socket.io/socket.io.js"></script>
 
-<script>
-  const socket = io()
+                        <script>
+                            const socket = io()
 
-  socket.on('newProduct', product  => {
-    const divContainer = document.getElementById('ulContainer')
+                            socket.on('newProduct', product => {
+                                const divContainer = document.getElementById('ulContainer')
 
-    const div = document.createElement('div')
-    div.innerHTML = 
-`
-    <div class="card card-body rounded-4 animate__animated animate__fadeInUp mb-2 ">
-        <div class="d-flex justify-content-between">
-          <h1 class="card-title h3" id="inputTitle" >${product.title}</h1>
-          <h2 class="card-title h3" id="inputDescription" >${product.desc}</h2>
-          <h1 class="card-title h3" id="inputPrice" >${product.price}</h1>
-          <div>
-              <button class="btn btn-danger delete" data-id="${product.id}">delete</button>
-              <button class="btn btn-secondary update" data-id="${product.id}">update</button>
-          </div>
-      </div>
-      <p>${product.thumbnails}</p>
-  </div>
-`
-    
-  ulContainer.appendChild(div)
-  })
+                                const div = document.createElement('div')
+                                div.innerHTML = `
+                                    <div class="card card-body rounded-4 animate__animated animate__fadeInUp mb-2 ">
+                                    <div class="d-flex justify-content-between">
+                                    <h1 class="card-title h3" id="titleRealTime" >${product.title}</h1>
+                                    <h2 class="card-title h3" id="descRealTime" >${product.desc}</h2>
+                                <h1 class="card-title h3" id="priceRealTime" >${product.price}</h1>
+                                <div>
+                                <button class="btn btn-danger " onclick='eliminateProduct("${product.id}")'>delete</button>
+                                <button class="btn btn-secondary update" data-id="${product.id}">update</button>
+                                </div>
+                                </div>
+                                <p>${product.thumbnails}</p>
+                                </div>`
 
-  socket.on('messageSuccess', data => {
-      let error = document.getElementById('errorAlert')
-      error.style.color = 'green'
-      error.innerText = data
-    })
+                                ulContainer.appendChild(div)
+                            })
 
-  socket.on('messageError', data => {
-    let error = document.getElementById('errorAlert')
-    error.style.color = 'red'
-    error.innerText = data
-  })
+                            socket.on('messageSuccess', data => {
+                                let error = document.getElementById('errorAlert')
+                                error.style.color = 'green'
+                                error.innerText = data
+                            })
 
-  let formProduct = document.getElementById('formProducts')
-  let inputTitle = document.getElementById('inputTitle')
-  let inputDescription = document.getElementById('inputDescription')
-  let inputPrice = document.getElementById('inputPrice')
-  let inputCode = document.getElementById('inputCode')
-  let inputStock = document.getElementById('inputStock') 
+                            socket.on('messageError', data => {
+                                let error = document.getElementById('errorAlert')
+                                error.style.color = 'red'
+                                error.innerText = data
+                            })
 
-  formProduct.addEventListener('submit', (event) => {
-    event.preventDefault()
-    event.stopPropagation()
-    const newProduct = {
-      title: inputTitle.value,
-      desc: inputDescription.value,
-      price: inputPrice.value,
-      code: inputCode.value,
-      stock: inputStock.value,
-    }
-    socket.emit('createProduct', newProduct)
-    formProduct.reset()
-  })
+                            let formProduct = document.getElementById('formProducts')
+                            let inputTitle = document.getElementById('inputTitle')
+                            let inputDescription = document.getElementById('inputDescription')
+                            let inputPrice = document.getElementById('inputPrice')
+                            let inputCode = document.getElementById('inputCode')
+                            let inputStock = document.getElementById('inputStock')
 
-  function eliminateProduct(data) {
-    socket.emit('deleteProduct', data)
-    Toastify({
-    text: "Producto eliminado con éxito",
-    duration: 3000,
-    destination: "#",
-    className: "toastify",
-    newWindow: true,
-    close: false,
-    gravity: "bottom",
-    position: "right", 
-    stopOnFocus: true, 
-    onClick: function(){} 
-}).showToast();
-  }
+                            formProduct.addEventListener('submit', (event) => {
+                                event.preventDefault()
+                                event.stopPropagation()
+                                const newProduct = {
+                                    title: inputTitle.value,
+                                    desc: inputDescription.value,
+                                    price: inputPrice.value,
+                                    code: inputCode.value,
+                                    stock: inputStock.value
+                                }
+                                socket.emit('createProduct', newProduct)
+                                formProduct.reset()
+                            })
 
-  socket.on('errorMessage', data => {
-    console.log(data)
-  })
+                            function eliminateProduct(data) {
+                                socket.emit('deleteProduct', data)
+                                Toastify({
+                                    text: "Product eliminated success",
+                                    duration: 4000,
+                                    destination: "#",
+                                    className: "toastify",
+                                    newWindow: true,
+                                    close: false,
+                                    gravity: "bottom",
+                                    position: "right",
+                                    stopOnFocus: true,
+                                    onClick: function () {}
+                                }).showToast();
+                            }
 
-  socket.on('refreshPage', data => {
+                            socket.on('errorMessage', data => {
+                                console.log(data)
+                            })
 
-    const productsRefreshed = data
-    divContainer.innerHTML = ""
-    productsRefreshed.forEach( item => {
-      const div = document.createElement("div")
-      div.innerHTML = `<div  class="card my-2 mx-2" style="width: 18rem; flex-grow: 1;">
-        <img src="${item.thumbnails}" class="card-img-top" alt="Imagen ilustrativa" id="imageRealTime">
-        <div class="card-body">
-        <h5 class="card-title text-center" id="titleRealTime">${item.title}</h5>
-        <p class="card-text text-center" id="descRealTime">${item.desc}</p>
-        <p class="card-text text-center pb-2" id="priceRealTime">Price: $${item.price}</p>
-        <div class="mx-2 mb-2 d-flex justify-content-around">
-        <a href="#" class="btn btn-secondary">Buy</a>
-        <a href="#" class="btn btn-danger" onclick=eliminateProduct("${item.id}")>Delete</a>
-      </div>
-      </div>
-    </div>`
-    divContainer.appendChild(div)
-    })
-  })
+                            socket.on('refreshPage', data => {
 
-</script>
+                                const productsRefreshed = data
+                                divContainer.innerHTML = ""
+                                productsRefreshed.forEach(item => {
+                                    const div = document.createElement("div")
+                                    div.innerHTML =
+                                    `<div  class="card my-2 mx-2" style="width: 18rem; flex-grow: 1;">
+                            <img src="${item.thumbnails}" class="card-img-top" alt="Imagen ilustrativa" id="imageRealTime">
+                            <div class="card-body">
+                            <h5 class="card-title text-center" id="titleRealTime">${item.title}</h5>
+                            <p class="card-text text-center" id="descRealTime">${item.desc}</p>
+                            <p class="card-text text-center pb-2" id="priceRealTime">Price: $${item.price}</p>
+                            <div class="mx-2 mb-2 d-flex justify-content-around">
+                            <a href="#" class="btn btn-secondary">Buy</a>
+                            <a href="#" class="btn btn-danger" onclick=eliminateProduct("${item.id}")>Delete</a>
+                            </div>
+                        </div>
+                        </div>`
+                                    divContainer.appendChild(div)
+                                })
+                            })
+                        </script>
