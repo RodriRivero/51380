@@ -5,9 +5,8 @@ Despliegue Postman 👍
 
 https://documenter.getpostman.com/view/27128483/2s93eYUXAm
 formulario para agregar productos
-image.png
-lista de productos
-image.png
+! [](src/public/thumbnails/form%20products.png) 
+![](src/public/thumbnails/products%20list.png)
 
 Comenzando 🚀
 Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas.
