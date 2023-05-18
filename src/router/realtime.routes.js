@@ -7,8 +7,7 @@ const router = Router()
 router.get('/realtimeproducts', async (req, res) => {
   try {
     const products = await ProductManager.getProducts()
-    res.status(200).render('realTimeProducts', { 
-        name: 'Agregar Producto', products , })
+    res.status(200).render('realTimeProducts', { name: 'Agregar Producto', products , })
   } catch (err) {
     res.status(400).json({
       error: 'Could not get the product list'

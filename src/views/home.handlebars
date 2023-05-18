@@ -1,19 +1,22 @@
 <h1 style="text-align: center;" class="mt-2">Lista de Productos</h1>
 <div  id="ulContainer" style="display: flex; flex-wrap: wrap; width: 90%; position: relative; left: 5%; " >
   {{#each products as |product|}}
-  <li id="{{product.id}}"></li>
+  <div id="{{product.id}}"></div>
   <div class="card my-2 mx-2 d-flex justify-content-between rounded-5" style="width: 18rem; flex-grow: 1;">
     <img src="{{product.thumbnails}}" class="card-img-top rounded-5" alt="Imagen ilustrativa" id="imageRealTime">
     <div class="card-body">
       <h5 class="card-title text-center" id="titleRealTime" >{{product.title}}</h5>
       <p class="card-text text-center" id="descRealTime">{{product.desc}}</p>
       <a class="card-text text-center pb-2" id="priceRealTime" href="">Price: ${{product.price}}</a>
-      <a href="#" class="btn btn-danger" onclick='eliminateProduct("{{product.id}}")'>Delete</a>
-      <a href="socket" class="btn btn-success d-flex justify-content-between">Buy</a>
+      <a href="" class="btn btn-danger"  method="DELETE" onclick='eliminateProduct("{{product.id}}")'>Delete</a>
+      <a href="/realTimeProducts" class="btn btn-success d-flex justify-content-between">Buy</a>
     </div>
   </div>
   {{/each}}
 </div>
+
+
+
 
 <script>
   const formProduct = document.getElementById('formProducts')
@@ -47,7 +50,7 @@
     })
     if(response.ok) {
       errorAlert.style.color = 'green'
-      errorAlert.innerText = 'Producto creado con éxito'
+      errorAlert.innerText = 'Product added with sucess'
       const data = await response.json()
 
       let div = document.createElement('div')

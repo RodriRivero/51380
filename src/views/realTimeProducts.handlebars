@@ -1,4 +1,4 @@
-<div class="container h-100 mt-3">
+<div  class="container h-100 mt-3">
     <div class="row">
         <div class="col-md-3 my-auto">
             <form id="formProducts" action="/api/products" method="POST" class="card card-body rounded-4">
@@ -25,9 +25,9 @@
                                     </form>
                                         <h5 id="errorAlert" style="text-align: center;"></h5>
                                 </div>
-                                <div
-                                    class="col-md-9" id="ulContainer"><!-- Divs generados dinámicamente se agregarán aquí -->
-                                </div>
+                                <div class="col-md-9" id="ulContainer">
+                                <!-- Div generado dinámicamente se agregará aquí -->
+                            </div>
                             </div>
                         </div>
 
@@ -48,7 +48,7 @@
                                     <h2 class="card-title h3" id="descRealTime" >${product.desc}</h2>
                                 <h1 class="card-title h3" id="priceRealTime" >${product.price}</h1>
                                 <div>
-                                <button class="btn btn-danger " onclick='eliminateProduct("${product.id}")'>delete</button>
+                                <button class="btn btn-danger "  method="DELETE "onclick='eliminateProduct("${product.id}")'>delete</button>
                                 <button class="btn btn-secondary update" data-id="${product.id}">update</button>
                                 </div>
                                 </div>
@@ -59,7 +59,7 @@
                             })
 
                             socket.on('messageSuccess', data => {
-                                let error = document.getElementById('errorAlert')
+                                let error = document.getElementById('sucessAlert')
                                 error.style.color = 'green'
                                 error.innerText = data
                             })
@@ -76,6 +76,7 @@
                             let inputPrice = document.getElementById('inputPrice')
                             let inputCode = document.getElementById('inputCode')
                             let inputStock = document.getElementById('inputStock')
+                            let inputThumbnail = document.getElementById('inputThumbnail')
 
                             formProduct.addEventListener('submit', (event) => {
                                 event.preventDefault()
@@ -85,7 +86,8 @@
                                     desc: inputDescription.value,
                                     price: inputPrice.value,
                                     code: inputCode.value,
-                                    stock: inputStock.value
+                                    stock: inputStock.value,
+                                    thumbnails:inputThumbnail.value
                                 }
                                 socket.emit('createProduct', newProduct)
                                 formProduct.reset()
@@ -95,8 +97,7 @@
                                 socket.emit('deleteProduct', data)
                                 Toastify({
                                     text: "Product eliminated success",
-                                    duration: 4000,
-                                    destination: "#",
+                                    duration: 2000,
                                     className: "toastify",
                                     newWindow: true,
                                     close: false,
@@ -118,7 +119,7 @@
                                 productsRefreshed.forEach(item => {
                                     const div = document.createElement("div")
                                     div.innerHTML =
-                                    `<div  class="card my-2 mx-2" style="width: 18rem; flex-grow: 1;">
+                                    `<div  class="card my-2 mx-2 animate__animated animate__fadeInUp mb-2" style="width: 18rem; flex-grow: 1;">
                             <img src="${item.thumbnails}" class="card-img-top" alt="Imagen ilustrativa" id="imageRealTime">
                             <div class="card-body">
                             <h5 class="card-title text-center" id="titleRealTime">${item.title}</h5>

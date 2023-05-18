@@ -10,7 +10,7 @@ export const initSockets = (server) => {
       try {
         const newProduct = await ProductManager.addProduct(data)
         ioServer.emit('newProduct', newProduct)
-        socket.emit('messageSuccess', 'Producto creado con éxito')
+        socket.emit('messageSuccess', 'Product create with sucess')
       } catch (err) {
         socket.emit('messageError', err.message)
       }
@@ -20,7 +20,7 @@ export const initSockets = (server) => {
       try {
         console.log(idProduct)
         await ProductManager.deleteProduct(idProduct)
-        const productsRefresh = await productManager.getProducts()
+        const productsRefresh = await ProductManager.getProducts()
         ioServer.emit('refreshPage', productsRefresh)
       } catch (err) {
         socket.emit('errorMessage', err.message)
