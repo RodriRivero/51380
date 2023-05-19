@@ -10,7 +10,7 @@ export const initSockets = (server) => {
       try {
         const newProduct = await ProductManager.addProduct(data)
         ioServer.emit('newProduct', newProduct)
-        socket.emit('messageSuccess', 'Product create with sucess')
+        socket.emit('messageSuccess', 'Product create with éxito')
       } catch (err) {
         socket.emit('messageError', err.message)
       }

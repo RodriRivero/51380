@@ -16,3 +16,21 @@ label{
 input{
     text-align: center;
 }
+
+ul, li {
+    list-style: none;
+  }
+  
+  .toastify {
+    background-color: red!important;
+    font-style: italic;
+    font-size: 25px;
+  }
+  .card{
+
+	background-color: #fff;
+	border:none;
+	border-radius: 20px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
