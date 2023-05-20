@@ -1,19 +1,37 @@
 <h1 style="text-align: center;" class="mt-2">Lista de Productos</h1>
-<div  id="ulContainer" style="display: flex " class="container" >
-  {{#each products as |product|}}
-  <div id="{{product.id}}"></div>
-  <div class="card my-2 mx-2 d-flex justify-content-between rounded-5" style="width: 18rem; flex-grow: 1;">
-    <img src="{{product.thumbnails}}" class="card-img-top rounded-5" alt="Imagen ilustrativa" id="imageRealTime">
-    <div class="card-body">
-      <h5 class="card-title text-center" id="titleRealTime" >{{product.title}}</h5>
-      <p class="card-text text-center" id="descRealTime">{{product.desc}}</p>
-      <a class="card-text text-center pb-2" id="priceRealTime" href="">Price: ${{product.price}}</a>
-      <a href="" class="btn btn-danger"  method="DELETE" onclick='eliminateProduct("{{product.id}}")'>Delete</a>
-      <a href="/realTimeProducts" class="btn btn-success d-flex justify-content-between">Buy</a>
+
+
+<div class="container mt-2 animate__animated animate__fadeInUp m-3 " id="ulContainer ">
+    <div class="d-flex justify-content-center row  m-4"  >
+        {{#each products as |product|}}
+        <div  id="{{product.id}}"  class="col-md-7 mb-3">
+            <div id="cont" class="row p-1  rounded-4">
+                <div class="col-md-3 m-0 "><img  class="img-fluid img-responsive rounded product-image rounded-4" src="{{product.thumbnails}}"></div>
+
+                <div id="cont" class=" col-md-5 mt-0 bg-white  pt-4 rounded-3"> 
+
+                    <h5 class="" id="titleRealTime" > title:{{product.title}}</h5>
+
+                    <div class="d-flex flex-row ">
+
+                    <span> stock:{{product.stock}}</span>
+                    </div>
+                    <div class="mt-1 mb-1 spec-1"><span  id="descRealTime" > description{{product.desc}}</span></div>
+                    <div class="mt-1 mb-1 spec-1"><span id="priceRealTime">price${{product.price}}</span></div>
+                </div>
+                <div class="align-items-center align-content-center col-md-3 border-center mt-3">
+                    <div class="d-flex flex-column mt-2"><button class="btn btn-primary btn-sm rounded-5" type="button">Added to cart</button>
+                    <div class="d-flex flex-column mt-2"><button class="btn btn-primary btn-sm rounded-5" type="button">Update</button>
+                    <div  href="#" class="d-flex flex-column mt-2"><button class="btn btn-primary btn-sm rounded-5" type="button">Buy</button>
+                    <button href="#" class="btn btn-outline-danger btn-sm mt-2 rounded-5"  onclick='eliminateProduct("{{product.id}}")' type="button">Delete</button></div>
+                </div>
+              </div>
+            </div>
+        </div>
     </div>
-  </div>
-  {{/each}}
+    {{/each}}
 </div>
+
 
 
 
