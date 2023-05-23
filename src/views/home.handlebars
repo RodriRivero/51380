@@ -1,36 +1,39 @@
-<h1 style="text-align: center;" class="mt-2">Lista de Productos</h1>
 
+    <h2 class="mt-4 mb-4 "><strong>Products</strong></h2> 
+<section class="container" >
+  <div class="container d-flex flex-wrap justify-content-center align-items-center d-grid gap-2" id="ulContainer">
+{{#each products as |product|}}
+  <div id="{{product.id}}" ></div>
+      <div class="col-lg-2 col-md-12 mb-4  "><!--tamañoa card--->
+        <div class="card rounded-4">
 
-<div class="container mt-2 animate__animated animate__fadeInUp m-3 " id="ulContainer ">
-    <div class="d-flex justify-content-center row  m-4"  >
-        {{#each products as |product|}}
-        <div  id="{{product.id}}"  class="col-md-7 mb-3">
-            <div id="cont" class="row p-1  rounded-4">
-                <div class="col-md-3 m-0 "><img  class="img-fluid img-responsive rounded product-image rounded-4" src="{{product.thumbnails}}"></div>
+          <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
+            data-mdb-ripple-color="light">
+            <img id="imageRealTime"   src="{{product.thumbnails}}"
+              class="w-100"/>
+          </div>
+          
+          <div class="card-body">
+            <a href="" class="text-reset">
+              <h4 id="titleRealTime" class="card-title mb-3">{{product.title}}</h4>
+            </a>
+            <a href="" class="text-reset">
+              <p  id="descRealTime" >{{product.desc}}</p>
+            </a>
+            <h6  id="priceRealTime" class="mb-3">${{product.price}}</h6>
+          </div>
+                <div class="d-flex justify-content-center mb-3 align-items-center h-100">
 
-                <div id="cont" class=" col-md-5 mt-0 bg-white  pt-4 rounded-3"> 
-
-                    <h5 class="" id="titleRealTime" > title:{{product.title}}</h5>
-
-                    <div class="d-flex flex-row ">
-
-                    <span> stock:{{product.stock}}</span>
-                    </div>
-                    <div class="mt-1 mb-1 spec-1"><span  id="descRealTime" > description{{product.desc}}</span></div>
-                    <div class="mt-1 mb-1 spec-1"><span id="priceRealTime">price${{product.price}}</span></div>
+                  <h5><span class="badge bg-danger ms-3" onclick='eliminateProduct("${{product.id}}")' ><i class="fa-solid fa-trash-can" ></i></span></h5>
+                  <h5><span class="badge bg-primary ms-3"><i class="fa-solid fa-cart-shopping"></i></span></h5>
+                  <h5><span class="badge bg-primary ms-3"><i class="fa-solid fa-pen-to-square"></i></span></h5>
                 </div>
-                <div class="align-items-center align-content-center col-md-3 border-center mt-3">
-                    <div class="d-flex flex-column mt-2"><button class="btn btn-primary btn-sm rounded-5" type="button">Added to cart</button>
-                    <div class="d-flex flex-column mt-2"><button class="btn btn-primary btn-sm rounded-5" type="button">Update</button>
-                    <div  href="#" class="d-flex flex-column mt-2"><button class="btn btn-primary btn-sm rounded-5" type="button">Buy</button>
-                    <button href="#" class="btn btn-outline-danger btn-sm mt-2 rounded-5"  onclick='eliminateProduct("{{product.id}}")' type="button">Delete</button></div>
-                </div>
-              </div>
-            </div>
         </div>
+      </div>
+  {{/each}}
     </div>
-    {{/each}}
-</div>
+</section>
+
 
 
 
@@ -73,18 +76,36 @@
 
       let div = document.createElement('div')
       div.setAttribute ('id', data.payload.id)
-      div.innerHTML = `<div  class="card my-2 mx-2" style="width: 18rem; flex-grow: 1;">
-      <img src="${data.payload.thumbnails}" class="card-img-top" alt="Imagen ilustrativa" id="imageRealTime">
-      <div class="card-body">
-        <h5 class="card-title text-center" id="titleRealTime">${data.payload.title}</h5>
-        <p class="card-text text-center" id="descRealTime">${data.payload.desc}</p>
-        <p class="card-text text-center pb-2" id="priceRealTime">Price: $${data.payload.price}</p>
-        <div class="mx-2 mb-2 d-flex justify-content-around">
-          <a href="#" class="btn btn-secondary">Buy</a>
-          <a href="#" class="btn btn-danger" onclick='eliminateProduct("${data.payload.id}")'>Delete</a>
+      div.innerHTML = 
+      `<div class="col-lg-2 col-md-12 mb-4 "><!--tamañoa card--->
+        <div class="card ">
+          <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
+            data-mdb-ripple-color="light">
+            <img id="imageRealTime"   src="${data.payload.thumbnails}"
+              class="w-100" />
+            <a href="#">
+              <div class="mask">
+                <div class="d-flex justify-content-start align-items-end h-100">
+                  <h5><span class="badge bg-danger ms-2"   onclick='eliminateProduct("${data.payload.id}")' ><i class="fa-solid fa-trash-can" ></i></span></h5>
+                  <h5><span class="badge bg-primary ms-2"><i class="fa-solid fa-cart-shopping"></i></span></h5>
+                </div>
+              </div>
+              <div class="hover-overlay">
+                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+              </div>
+            </a>
+          </div>
+          <div class="card-body">
+            <a href="" class="text-reset">
+              <h5 id="titleRealTime" class="card-title mb-3">${data.payload.title}</h5>
+            </a>
+            <a href="" class="text-reset">
+              <p  id="descRealTime" >${data.payload.desc}sc}}</p>
+            </a>
+            <h6  id="priceRealTime" class="mb-3">$${data.payload.price}</h6>
+          </div>
         </div>
-        </div>
-        </div>`
+      </div>`
       divContainer.appendChild(div)
       formProduct.reset()
     } else {

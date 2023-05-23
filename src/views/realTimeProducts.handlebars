@@ -1,6 +1,6 @@
 <div  class="container   ">
-    <div class="row justify-content-center mt-3 ">
-        <div class="col-md-4   p-5 ">
+    <div class="row justify-content-center mt-3 mb-5">
+        <div class="col-md-5   p-5 ">
             <form id="formProducts" action="/api/products" method="POST" class="card card-body rounded-4">
                 <h2 class="h2 mb-4">Add a Product</h2>
                 <label for="exampleTitle" class="form-label fw-bold">Title</label>
@@ -21,7 +21,7 @@
                                     <label for="exampleStock" class="form-label fw-bold rounded-4">Stock Quantity</label>
                                     <input type="number" class="form-control mb-3 rounded-4 " id="inputStock" placeholder="Insert stock">
 
-                                        <button type="submit" class="btn btn-success  rounded-4" id="buttonForm">Added</button>
+                                        <button type="submit" class="btn custom-button rounded-4" id="buttonForm">Added</button>
                                     </form>
                                         <h5 id="errorAlert" style="text-align: center;"></h5>
                                 </div>
@@ -39,19 +39,41 @@
                                 const divContainer = document.getElementById('ulContainer')
 
                                 const div = document.createElement('div')
-                                div.innerHTML = `
-                                    <div class="card card-body rounded-4 animate__animated animate__fadeInUp mb-2 ">
-                                    <div class="d-flex justify-content-between">
-                                    <h1 class="card-title h3" id="titleRealTime" >${product.title}</h1>
-                                    <h2 class="card-title h3" id="descRealTime" >${product.desc}</h2>
-                                <h1 class="card-title h3" id="priceRealTime" >${product.price}</h1>
-                                <div>
-                                <button class="btn btn-danger "  method="DELETE "onclick='eliminateProduct("${product.id}")'>delete</button>
-                                <button class="btn btn-secondary update" data-id="${product.id}">update</button>
-                                </div>
-                                </div>
-                                <p>${product.thumbnails}</p>
-                                </div>`
+                                div.innerHTML = 
+          
+
+      `<div class="col-lg-2 col-md-12 mb-4 "><!--tamañoa card--->
+        <div class="card ">
+          <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
+            data-mdb-ripple-color="light">
+            <img id="imageRealTime"   src="${product.thumbnails}"
+              class="w-100" />
+            <a href="#">
+              <div class="mask">
+                <div class="d-flex justify-content-start align-items-end h-100">
+                  <h5><span class="badge bg-danger ms-2"  method="DELETE"  onclick='eliminateProduct("${product.id}")' ><i class="fa-solid fa-trash-can" ></i></span></h5>
+                  <h5><span class="badge bg-primary ms-2"><i class="fa-solid fa-cart-shopping"></i></span></h5>
+                </div>
+              </div>
+              <div class="hover-overlay">
+                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+              </div>
+            </a>
+          </div>
+          <div class="card-body">
+            <a href="" class="text-reset">
+              <h5 id="titleRealTime" class="card-title mb-3">${product.title}</h5>
+            </a>
+            <a href="" class="text-reset">
+              <p  id="descRealTime" >${product.desc}sc}}</p>
+            </a>
+            <h6  id="priceRealTime" class="mb-3">$${product.price}</h6>
+          </div>
+        </div>
+      </div>`
+
+
+
 
                                 ulContainer.appendChild(div)
                             })

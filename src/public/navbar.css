@@ -1,37 +1,48 @@
-*{
+@import url('https://fonts.googleapis.com/css2?family=Raleway &display=swap');
+
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family:'Open Sans', sans-serif ;
+    font-family: 'Raleway', sans-serif;
 }
 
-body{
+
+body {
+    background-color: #f7f2f7;
+    background-image: linear-gradient(0deg, #f7f2f7 82%, #97D9E1 100%);
+    text-align: center;
     height: 100vh;
-    background-color: black;
-    background-image: ;
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
 }
 
-li{
+li {
     list-style: none;
 }
 
-a{
+a {
     text-decoration: none;
     color: #fff;
+    font-size: 1rem;
+    text-shadow: 2px 2px 8px rgb(112, 110, 110);
 }
 
-a:hover{
-    color: orange;
+a:hover {
+    color: rgb(220, 198, 112);
+    text-shadow: 2px 5px 15px rgb(247, 244, 244);
 }
 /*HEADER****************************************/
-header{
+header {
     position: relative;
     padding: 0 2rem;
 }
 
-.navbar{
+.navbar {
+    position: relative;
+    z-index: 1;
     width: 100%;
     height: 60px;
     max-width: 1200px;
@@ -47,18 +58,16 @@ header{
 }
 .navbar .links {
     display: flex;
-    gap:2rem;
+    gap: 3rem;
 }
 
-.navbar .toggle_btn {
+.navbar .toggle_btn{
     color: #fff;
     font-size: 1.5rem;
-    cursor:pointer;
+    cursor: pointer;
     display: none;
 }
-.action_btn{
-    background-color:orange ;
-    color: #fff;
+.action_btn {
     padding: 0.5rem 1rem;
     border: none;
     outline: none;
@@ -66,28 +75,120 @@ header{
     font-size: 0.8rem;
     font-weight: bold;
     cursor: pointer;
-    transition: scale 0.2 ease;
+    transition: scale 0.3 ease;
 }
 
-.action_btn:hover{
-    scale: 1.05;
+.action_btn:hover {
+    scale: 1.15;
     color: #fff;
 }
 
-.action_btn:active{
+.action_btn:active {
     scale: 0.95;
 }
 
-/***RESPONSIII NAVABAR*******************/
+/******RESPONSIVE DESING*****/
 
-@media(max-width: 992px ){
+@media(max-width:992px){
     .navbar .links,
-    .navbar .action_btn{
+    .navbar .action_btn {
+        display: none;
+    }
+    .navbar .toggle_btn{
+        display: block;
+    }
+    .dropdown_menu {
+        display: block;
+    }
+}
+
+
+/****DROPDONW MENU**********************/
+
+.dropdown_menu {
+    display: none;
+    position: absolute;
+    z-index: 2;
+    right: 2rem;
+    top: 60px;
+    height: 0;
+    width: 300px;
+    background: rgba(84, 150, 209, 0.1);
+    backdrop-filter: blur(15px);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: height 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.dropdown_menu.open {
+    height: 240px;
+
+}
+
+.dropdown_menu li {
+    padding: 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dropdown_menu .action_btn {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+/***RESPONSIVE   NAVBAR*******************/
+
+@media(max-width: 992px) {
+    .navbar .links,
+    .navbar .action_btn {
         display: none;
     }
 
-    .navbar .toggle_btn{
+    .navbar .toggle_btn {
+        display: block;
+    }
+    .dropdown_menu {
         display: block;
     }
 
 }
+@media(max-width: 576px) {
+    .dropdown_menu {
+        left: 2rem;
+        width: unset;
+    }
+
+    }
+    
+
+/******FORM ************/
+
+#formProducts{
+    height: 590px;
+    background: rgba(84, 150, 209, 0.1);
+    backdrop-filter: blur(15px);
+    border: none;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+#buttonForm{
+    color: #f8feff;
+    box-shadow: px 1px   10px #4bb8cc;
+}
+.custom-button {
+    background-color: #6eadaa; /* Cambia el color de fondo según tus necesidades */
+    color: #ffffff; /* Cambia el color del texto según tus necesidades */
+    /* Otros estilos personalizados */
+}
+
+input {
+    text-align: center;
+}
+
+#cont {
+
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+
+
