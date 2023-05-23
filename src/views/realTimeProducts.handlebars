@@ -34,47 +34,43 @@
 
                         <script>
                             const socket = io()
+                                let divContainer = document.getElementById('ulContainer')
 
                             socket.on('newProduct', product => {
-                                const divContainer = document.getElementById('ulContainer')
 
-                                const div = document.createElement('div')
+                                let div = document.createElement('div')
                                 div.innerHTML = 
           
 
-      `<div class="col-lg-2 col-md-12 mb-4 "><!--tamañoa card--->
-        <div class="card ">
-          <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
-            data-mdb-ripple-color="light">
-            <img id="imageRealTime"   src="${product.thumbnails}"
-              class="w-100" />
-            <a href="#">
-              <div class="mask">
-                <div class="d-flex justify-content-start align-items-end h-100">
-                  <h5><span class="badge bg-danger ms-2"  method="DELETE"  onclick='eliminateProduct("${product.id}")' ><i class="fa-solid fa-trash-can" ></i></span></h5>
-                  <h5><span class="badge bg-primary ms-2"><i class="fa-solid fa-cart-shopping"></i></span></h5>
-                </div>
-              </div>
-              <div class="hover-overlay">
-                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-              </div>
-            </a>
-          </div>
-          <div class="card-body">
-            <a href="" class="text-reset">
-              <h5 id="titleRealTime" class="card-title mb-3">${product.title}</h5>
-            </a>
-            <a href="" class="text-reset">
-              <p  id="descRealTime" >${product.desc}sc}}</p>
-            </a>
-            <h6  id="priceRealTime" class="mb-3">$${product.price}</h6>
-          </div>
-        </div>
-      </div>`
-
-
-
-
+                                    `<div class="col-lg-2 col-md-12 mb-4 animate__animated animate__fadeInUp"><!--tamañoa card--->
+                                      <div class="card ">
+                                        <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
+                                          data-mdb-ripple-color="light">
+                                          <img id="imageRealTime"   src="${product.thumbnails}"
+                                            class="w-100" />
+                                          <a href="#">
+                                            <div class="mask">
+                                              <div class="d-flex justify-content-start align-items-end h-100">
+                                                <h5><span href="#" class="badge bg-danger ms-2"  onclick='eliminateProduct("${product.id}")' ><i class="fa-solid fa-trash-can" ></i></span></h5>
+                                                <h5><span class="btn btn bg-primary ms-2"><i class="fa-solid fa-cart-shopping"></i></span></h5>
+                                              </div>
+                                            </div>
+                                            <div class="hover-overlay">
+                                              <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                                            </div>
+                                          </a>
+                                        </div>
+                                        <div class="card-body">
+                                          <a href="" class="text-reset">
+                                            <h5 id="titleRealTime" class="card-title mb-3">${product.title}</h5>
+                                          </a>
+                                          <a href="" class="text-reset">
+                                            <p  id="descRealTime" >${product.desc}sc}}</p>
+                                          </a>
+                                          <h6  id="priceRealTime" class="mb-3">$${product.price}</h6>
+                                        </div>
+                                      </div>
+                                    </div>`
                                 ulContainer.appendChild(div)
                             })
 
@@ -139,18 +135,37 @@
                                 productsRefreshed.forEach(item => {
                                     const div = document.createElement("div")
                                     div.innerHTML =
-                                    `<div  class="card my-2 mx-2 animate__animated animate__fadeInUp mb-2" style="width: 18rem; flex-grow: 1;">
-                            <img src="${item.thumbnails}" class="card-img-top" alt="Imagen ilustrativa" id="imageRealTime">
-                            <div class="card-body">
-                            <h5 class="card-title text-center" id="titleRealTime">${item.title}</h5>
-                            <p class="card-text text-center" id="descRealTime">${item.desc}</p>
-                            <p class="card-text text-center pb-2" id="priceRealTime">Price: $${item.price}</p>
-                            <div class="mx-2 mb-2 d-flex justify-content-around">
-                            <a href="#" class="btn btn-secondary">Buy</a>
-                            <a href="#" class="btn btn-danger" onclick=eliminateProduct("${item.id}")>Delete</a>
-                            </div>
-                        </div>
-                        </div>`
+
+                                    `<div class="col-lg-2 col-md-12 mb-4 animate__animated animate__fadeInUp"><!--tamañoa card--->
+                                      <div class="card ">
+                                        <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
+                                          data-mdb-ripple-color="light">
+                                          <img id="imageRealTime"   src="${item.thumbnails}"
+                                            class="w-100" />
+                                          <a href="#">
+                                            <div class="mask">
+                                              <div class="d-flex justify-content-start align-items-end h-100">
+                                                <h5><span href="#" class="badge bg-danger ms-2"  onclick='eliminateProduct("${item.id}")' ><i class="fa-solid fa-trash-can" ></i></span></h5>
+                                                <h5><span class="btn btn bg-primary ms-2"><i class="fa-solid fa-cart-shopping"></i></span></h5>
+                                              </div>
+                                            </div>
+                                            <div class="hover-overlay">
+                                              <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                                            </div>
+                                          </a>
+                                        </div>
+                                        <div class="card-body">
+                                          <a href="" class="text-reset">
+                                            <h5 id="titleRealTime" class="card-title mb-3">${item.title}</h5>
+                                          </a>
+                                          <a href="" class="text-reset">
+                                            <p  id="descRealTime" >${item.desc}sc}}</p>
+                                          </a>
+                                          <h6  id="priceRealTime" class="mb-3">$${item.price}</h6>
+                                        </div>
+                                      </div>
+                                    </div>`
+
                                     divContainer.appendChild(div)
                                 })
                             })

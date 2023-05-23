@@ -12,7 +12,7 @@
             <img id="imageRealTime"   src="{{product.thumbnails}}"
               class="w-100"/>
           </div>
-          
+
           <div class="card-body">
             <a href="" class="text-reset">
               <h4 id="titleRealTime" class="card-title mb-3">{{product.title}}</h4>
@@ -24,7 +24,7 @@
           </div>
                 <div class="d-flex justify-content-center mb-3 align-items-center h-100">
 
-                  <h5><span class="badge bg-danger ms-3" onclick='eliminateProduct("${{product.id}}")' ><i class="fa-solid fa-trash-can" ></i></span></h5>
+                  <a href="#" class="btn btn-danger" onclick='eliminateProduct("{{product.id}}")' ><i class="fa-solid fa-trash-can" ></i></a>
                   <h5><span class="badge bg-primary ms-3"><i class="fa-solid fa-cart-shopping"></i></span></h5>
                   <h5><span class="badge bg-primary ms-3"><i class="fa-solid fa-pen-to-square"></i></span></h5>
                 </div>
