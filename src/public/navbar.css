@@ -7,6 +7,15 @@
     box-sizing: border-box;
     font-family: 'Raleway', sans-serif;
 }
+.toastify {
+    background-color: red!important;
+    font-style: italic;
+    font-size: 25px;
+  }
+  strong{
+    color: rgb(240, 230, 88);
+    text-shadow: 2px 2px 8px rgb(112, 110, 110);
+  }
 
 
 body {
@@ -170,6 +179,7 @@ header {
     backdrop-filter: blur(15px);
     border: none;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
 }
 #buttonForm{
     color: #f8feff;

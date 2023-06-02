@@ -1,4 +1,4 @@
-import { __dirname } from './utils.js'
+import { __dirname, connectMongo } from './utils.js'
 import apiRouter from "./router/api.routes.js"
 import express from 'express'
 import handlebars from 'express-handlebars'
@@ -28,5 +28,7 @@ const httpServer = app.listen(PORT, () => {
 })
 // SOCKET IO
 initSockets(httpServer)
+
+connectMongo();
 
 

@@ -1,92 +1,12 @@
 [
   {
-    "id": "h04XGp2c6Vfo-NxksBFMo",
-    "title": "messi",
-    "desc": "el 10",
-    "price": 66000,
-    "code": 10,
+    "id": "UsCQQOQHkmBK3HMLHMQM4",
+    "title": "Lionel Messi",
+    "desc": "Campeon del mundo",
+    "price": 10000000000,
+    "code": 0,
     "stock": 1,
-    "thumbnails": "https://media.tycsports.com/files/2023/02/10/532928/lionel-messi_1440x810_wmk.webp",
-    "status": true
-  },
-  {
-    "id": "KmTNSDe1p1rF3pWfbhuL9",
-    "title": "diego maradona",
-    "desc": "barrilete cosmico",
-    "price": 1000000,
-    "code": 11,
-    "stock": 1,
-    "thumbnails": "https://cloudfront-us-east-1.images.arcpublishing.com/infobae/FR4QYI5Q3VCUBMWA3KHU6WM3OQ.jpg",
-    "status": true
-  },
-  {
-    "id": "h04XGp2c6Vfo-NxksBFMo",
-    "title": "messi",
-    "desc": "el 10",
-    "price": 66000,
-    "code": 10,
-    "stock": 1,
-    "thumbnails": "https://media.tycsports.com/files/2023/02/10/532928/lionel-messi_1440x810_wmk.webp",
-    "status": true
-  },
-  {
-    "id": "KmTNSDe1p1rF3pWfbhuL9",
-    "title": "diego maradona",
-    "desc": "barrilete cosmico",
-    "price": 1000000,
-    "code": 11,
-    "stock": 1,
-    "thumbnails": "https://cloudfront-us-east-1.images.arcpublishing.com/infobae/FR4QYI5Q3VCUBMWA3KHU6WM3OQ.jpg",
-    "status": true
-  },
-  {
-    "id": "h04XGp2c6Vfo-NxksBFMo",
-    "title": "messi",
-    "desc": "el 10",
-    "price": 66000,
-    "code": 10,
-    "stock": 1,
-    "thumbnails": "https://media.tycsports.com/files/2023/02/10/532928/lionel-messi_1440x810_wmk.webp",
-    "status": true
-  },
-  {
-    "id": "h04XGp2c6Vfo-NxksBFMo",
-    "title": "messi",
-    "desc": "el 10",
-    "price": 66000,
-    "code": 10,
-    "stock": 1,
-    "thumbnails": "https://media.tycsports.com/files/2023/02/10/532928/lionel-messi_1440x810_wmk.webp",
-    "status": true
-  },
-  {
-    "id": "KmTNSDe1p1rF3pWfbhuL9",
-    "title": "diego maradona",
-    "desc": "barrilete cosmico",
-    "price": 1000000,
-    "code": 11,
-    "stock": 1,
-    "thumbnails": "https://cloudfront-us-east-1.images.arcpublishing.com/infobae/FR4QYI5Q3VCUBMWA3KHU6WM3OQ.jpg",
-    "status": true
-  },
-  {
-    "id": "L452qgfbmETGKwNL3UYa9",
-    "title": "pipi",
-    "desc": "romagnoli",
-    "price": 45651321,
-    "code": 12,
-    "stock": 1,
-    "thumbnails": "https://tn.com.ar/resizer/lRxs6xTUqmd2JHXMqOq5ylUAvTk=/arc-anglerfish-arc2-prod-artear/public/7AMTNQYWPNNBW2MHFSG3LKTEMI.jpg",
-    "status": true
-  },
-  {
-    "id": "Aqsv4-IfOhuVPuH5PG1C4",
-    "title": "mochi",
-    "desc": "asadas",
-    "price": 2131313,
-    "code": 34424,
-    "stock": 33,
-    "thumbnails": "https://media.tycsports.com/files/2020/12/06/160024/maradona-imagen_416x555.jpg?v=1",
+    "thumbnails": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrYnVbsi8C_Y6p58F-6iGjA_H0a3U2YF2b-A&usqp=CAU",
     "status": true
   }
 ]
