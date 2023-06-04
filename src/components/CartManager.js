@@ -66,4 +66,4 @@ class CartManager {
   }
 }
 
-export default new CartManager('./src/models/carts.json')
+export default new CartManager('./src/dao/models/carts.json')

@@ -42,9 +42,7 @@ router.post('/', async (req, res) => {
   try {
     const productToAdd = req.body
     console.log(productToAdd)
-    /* if (req.file) {
-      productToAdd.thumbnails = `/thumbnails/${req.file.filename}`
-    } */
+
     const product = await ProductManager.addProduct(productToAdd)
     res.status(200).json({
       status: true,

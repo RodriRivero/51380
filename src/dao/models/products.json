@@ -8,5 +8,15 @@
     "stock": 1,
     "thumbnails": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrYnVbsi8C_Y6p58F-6iGjA_H0a3U2YF2b-A&usqp=CAU",
     "status": true
+  },
+  {
+    "id": "lZqO4ZEjOPkEEaLD9Fv7g",
+    "title": "mc callister",
+    "desc": "el falso 10 ",
+    "price": 100000000,
+    "code": 3,
+    "stock": 1,
+    "thumbnails": "https://www.elgrafico.com.ar/media/cache/pub_news_details_large/media/i/54/f5/54f558f0066ae91f4feb1c0f776ee1b6a457bdea.jfif",
+    "status": true
   }
 ]

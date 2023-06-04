@@ -1,6 +1,7 @@
 import multer from "multer";
 import { fileURLToPath } from "url";
 import path from "path";
+import { Server } from "socket.io";
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -12,9 +13,21 @@ const storage = multer.diskStorage({
 });
 
 export const uploader = multer({storage});
-
 export const __filename = fileURLToPath(import.meta.url);
 export const __dirname = path.dirname(__filename);
+
+
+export function connectSocket(httpServer) {
+  const socketServer = new Server(httpServer);
+  let msgs = [];
+
+  socketServer.on("connection", (socket)=> {
+    socket.on("msg_front_to_back", (msg) =>{
+      msgs.unshift(msg);
+      socketServer.emit("msg_back_to_front", msgs);
+    });
+  });
+}
 
 
 import { connect } from "mongoose";

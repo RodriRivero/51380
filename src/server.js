@@ -1,10 +1,11 @@
-import { __dirname, connectMongo } from './utils.js'
+import { __dirname, connectMongo, connectSocket } from './utils.js'
 import apiRouter from "./router/api.routes.js"
 import express from 'express'
 import handlebars from 'express-handlebars'
 import { initSockets } from './socket/socketServer.js'
 import path from 'path';
 import viewRouter from './router/view.routes.js'
+import { testSocketChatRouter } from "./router/socket.chat.routes.js";
 
 
 const PORT = 8080
@@ -27,8 +28,12 @@ const httpServer = app.listen(PORT, () => {
     console.log(`Server up and running on port http://localhost:${PORT}`)
 })
 // SOCKET IO
+//Rutas: SOCKETS
+app.use("/chat", testSocketChatRouter);
+
 initSockets(httpServer)
 
 connectMongo();
+connectSocket(httpServer)
 
 
