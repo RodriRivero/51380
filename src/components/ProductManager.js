@@ -89,4 +89,4 @@ export class ProductManager {
   }
 }
 
-export default new ProductManager('./src/models/products.json')
+export default new ProductManager('./src/dao/models/products.json')
