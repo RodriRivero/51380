@@ -1,3 +1,4 @@
+import { connect } from "mongoose";
 import multer from "multer";
 import { fileURLToPath } from "url";
 import path from "path";
@@ -30,12 +31,11 @@ export function connectSocket(httpServer) {
 }
 
 
-import { connect } from "mongoose";
 export async function connectMongo() {
   try {
     await connect(
       /* PONER TU STRING ENTERO ACA */
-      "mongodb+srv://guido35723776:Pechoncha90@mongo-51380-rivero.aj8pasu.mongodb.net/?retryWrites=true&w=majority"
+      "mongodb+srv://guido35723776:Pechoncha90@mongo-51380-rivero.aj8pasu.mongodb.net/ecommerce?retryWrites=true&w=majority"
     );
     console.log("plug to mongo!");
   } catch (e) {

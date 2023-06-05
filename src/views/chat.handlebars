@@ -1,12 +1,133 @@
-<p>
-  todo listo para trabajar con sockets
-</p>
+<section class="rounder 3" id="formLogin">
+      <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen lg:py-0">
+        <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900">
+          Chat Web Socket.IO
+        </a>
+        <div class=" rounded-lg   sm:max-w-md xl:p-0" >
+          <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+            <h2 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl"><strong>
+              Inicia sesión en tu cuenta
+            </strong></h2>
+            <div class="space-y-4 md:space-y-6">
+              <div>
+                <label for="userNickName" class="block mb-2 text-sm font-medium text-gray-900">Usuario</label>
+                <input
+                  type="text"
+                  name="userNickName"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                  id="userNickName"
+                  placeholder="Ingresa tu nickname"
+                  required=""
+                />
+              </div>
+              <button
+                type="submit" class=" bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                id="registerUser">
+                Acceder
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="body-chat">
+      <div class="containerchat">
+        <div class="leftSide">
+          <div class="header">
+            <div class="userimg">
+              <img src="../thumbnails/profile_circle_icon.png" class="cover" />
+            </div>
+            <ul class="nav_icons">
+              <li><ion-icon name="scan-circle-outline"></ion-icon></li>
+              <li><ion-icon name="chatbox"></ion-icon></li>
+              <li><ion-icon name="ellipsis-vertical"></ion-icon></li>
+            </ul>
+          </div>
+          <div class="search_chat">
+            <div>
+              <input type="text" placeholder="Busca un chat o inicia uno nuevo." />
+              <ion-icon name="search-outline"></ion-icon>
+            </div>
+          </div>
+          <div class="chatlist">
+            <div class="block active">
+              <div class="imgbx">
+                <img src="../thumbnails/profile_circle_icon.png" class="cover" />
+              </div>
+              <div class="details">
+                <div class="listHead">
+                  <h4>Chat</h4>
+                  <p class="time" style="visibility: hidden;">
+                    Hora en 2da versión.
+                  </p>
+                </div>
+                <div class="message_p">
+                  <p>Recuerda, respetar a los demás usuarios.</p>
+                </div>
+              </div>
+            </div>
+            <div id="formShowUsers">
+              <div class="block" id="formShowUsers">
+               
+                <div class="details">
+                  <div class="listHead">
+                    <h4>Usuarios en línea:</h4>
+                    <p class="time" style="visibility: hidden;">
+                      Hora en 2da versión.
+                    </p>
+                  </div>
+                  <div class="message_p">
+                    <ul id="usersActive"></ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="rightSide" id="formChatGrupal">
+          <div class="header">
+            <div class="imgText">
+              <div class="userimg">
+                <img src="../thumbnails/profile_circle_icon.png" class="cover" />
+              </div>
+              <h4>Chat<br /><span>en línea</span></h4>
+            </div>
+            <ul class="nav_icons">
+              <li><ion-icon name="search-outline"></ion-icon></li>
+              <li><ion-icon name="ellipsis-vertical"></ion-icon></li>
+            </ul>
+          </div>
+
+          <div class="chatBox" id="messages">
+          </div>
+
+          <div class="chatBox_input">
+            <input id="userFile" type="file" accept="image/png, image/jpeg" hidden />
+            <button id="sendFile"><ion-icon name="attach-outline"></ion-icon></button>
+            <input type="text" id="userMessage" placeholder="Escribe un mensaje aqui" />
+            <button id="sendMessage"><ion-icon name="send-outline"></ion-icon></button> 
+          </div>
+        </div>
+      </div>
+    </section>
+
+
 <input id="chat-box" name="chatbox" type="text" value="" />
 <div id="div-msgs" style="border: 1px solid black;">Loading... msgs</div>
 
 
 <script src="/socket.io/socket.io.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+
+
 <script >
   
 const socket = io();
