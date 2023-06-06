@@ -34,6 +34,8 @@ app.use("/chat", testSocketChatRouter);
 initSockets(httpServer)
 
 connectMongo();
-connectSocket(httpServer)
+connectSocket(httpServer) 
+
+
 
 

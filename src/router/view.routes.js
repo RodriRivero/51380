@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import ProductManager from '../components/ProductManager.js'
+import ProductManager from '../dao/ProductManager.js'
 import realTimeRouter from './realtime.routes.js'
 
 const router = Router()
