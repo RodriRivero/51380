@@ -1,7 +1,7 @@
 import express from 'express';
 import CartService from '../services/carts.service.js';
 
-export const cartsRouter = express.Router();
+const cartsRouter = express.Router();
 
 const cartService = new CartService();
 
@@ -21,6 +21,7 @@ cartsRouter.post("/", async (req, res) => {
     });
   }
 });
+
 
 cartsRouter.get("/:cid", async (req, res) => {
   try {
@@ -95,3 +96,5 @@ cartsRouter.delete("/:cid/products/:pid", async (req, res) => {
     });
   }
 });
+
+export default cartsRouter
