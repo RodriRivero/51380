@@ -1,12 +1,19 @@
 import { Schema, model } from "mongoose";
 
-const productSchema = new Schema({
-  idProduct: { type: Schema.Types.ObjectId, ref: "products" },
-  quantity: { type: Number }
-}, { _id: false });  // <-- No generar un _id adicional para el subdocumento
+const schema = new Schema({
+  products: {
+    type: [
+      {
+        product: {
+          type: Schema.Types.ObjectId,
+          ref: "products",
+          required: true,
+        },
+        quantity: { type: Number, default: 1 },
+      },
+    ],
+    default: [],
+  },
+});
 
-const cartSchema = new Schema({
-  products: [productSchema]
-}, { versionKey: false });
-
-export const CartModel = model("carts", cartSchema);     
+export const CartModel = model("carts", schema);     
