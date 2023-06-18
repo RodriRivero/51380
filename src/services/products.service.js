@@ -1,6 +1,6 @@
 import { ProductModel } from "../dao/models/products.model.js";
 
-class ProductService{
+class ProductService {
     
     validate(title, description, price, thumbnail, code, stock, category){
         if (!title || !description || !price || !thumbnail || !code || !stock || !category) {
@@ -19,6 +19,7 @@ class ProductService{
                 {availability: query},
             ];
         }
+
 
         const options = {
             page: parseInt(page),

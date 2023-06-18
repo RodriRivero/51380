@@ -50,7 +50,7 @@ class CartService {
   
     async updateProductQuantity(cartId, productId, quantity) {
       try {
-        //   console.log(cartId, productId, quantity);
+
   
         const cart = await CartModel.findById(cartId);
         const productIndex = cart.products.findIndex(

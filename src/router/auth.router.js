@@ -1,6 +1,6 @@
 import express from 'express';
 import { UserModel } from '../dao/models/users.model.js';
-// import { UserService } from '../services/users.service.js';
+
 import { isAdmin, isUser } from '../middlewares/auth.js';
 
 export const authRouter = express.Router();
@@ -28,14 +28,14 @@ authRouter.get('/login', (req, res) => {
 });
 
 authRouter.post('/login', async (req, res) => {
-  const { email, pass } = req.body;
-  if (!email || !pass) {
+  const { email, password } = req.body;
+  if (!email || !password) {
     return res.status(400).render('error', { error: 'ponga su email y pass' });
   }
-  const usarioEncontrado = await UserModel.findOne({ email: email });
-  if (usarioEncontrado && usarioEncontrado.pass == pass) {
-    req.session.email = usarioEncontrado.email;
-    req.session.isAdmin = usarioEncontrado.isAdmin;
+  const usuarioEncontrado = await UserModel.findOne({ email: email });
+  if (usuarioEncontrado && usuarioEncontrado.pass == pass) {
+    req.session.email = usuarioEncontrado.email;
+    req.session.isAdmin = usuarioEncontrado.isAdmin;
 
     return res.redirect('/auth/perfil');
   } else {
@@ -48,12 +48,12 @@ authRouter.get('/register', (req, res) => {
 });
 
 authRouter.post('/register', async (req, res) => {
-  const { email, pass, firstName, lastName } = req.body;
-  if (!email || !pass || !firstName || !lastName) {
+  const { email, password, firstName, lastName } = req.body;
+  if (!email || !password || !firstName || !lastName || !age) {
     return res.status(400).render('error', { error: 'ponga bien toooodoo cheee!!' });
   }
   try {
-    await UserModel.create({ email: email, pass: pass, firstName: firstName, lastName: lastName, isAdmin: false });
+    await UserModel.create({ email: email, password: password, firstName: firstName, age: age, lastName: lastName, isAdmin: false });
     req.session.email = email;
     req.session.isAdmin = false;
 
