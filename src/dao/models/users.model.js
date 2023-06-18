@@ -17,11 +17,16 @@ const schema = new Schema({
         max: 100,
         unique: true
     },
-    pass: {
+    password: {
         type: String,
         required: true,
         max: 100,
     },
+    age: {
+      type: String,
+      required: true,
+      max: 100,
+  },
     isAdmin: {
         type: Boolean,
         required: true

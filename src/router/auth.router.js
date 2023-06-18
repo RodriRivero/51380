@@ -30,16 +30,16 @@ authRouter.get('/login', (req, res) => {
 authRouter.post('/login', async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) {
-    return res.status(400).render('error', { error: 'ponga su email y pass' });
+    return res.status(400).render('error', { error: 'Ingrese su email y password' });
   }
   const usuarioEncontrado = await UserModel.findOne({ email: email });
-  if (usuarioEncontrado && usuarioEncontrado.pass == pass) {
+  if (usuarioEncontrado && usuarioEncontrado.password == password) {
     req.session.email = usuarioEncontrado.email;
     req.session.isAdmin = usuarioEncontrado.isAdmin;
 
-    return res.redirect('/auth/perfil');
+    return res.redirect('/products');
   } else {
-    return res.status(401).render('error', { error: 'email o pass estan mal' });
+    return res.status(401).render('error', { error: 'Email o password incorrectos' });
   }
 });
 
@@ -48,7 +48,7 @@ authRouter.get('/register', (req, res) => {
 });
 
 authRouter.post('/register', async (req, res) => {
-  const { email, password, firstName, lastName } = req.body;
+  const { email, password, firstName, lastName, age } = req.body;
   if (!email || !password || !firstName || !lastName || !age) {
     return res.status(400).render('error', { error: 'ponga bien toooodoo cheee!!' });
   }
