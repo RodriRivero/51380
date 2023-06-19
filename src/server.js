@@ -32,15 +32,13 @@ app.use(express.static( 'src/public'));
 
 app.use(
     session({
-      store: MongoStore.create({ mongoUrl: 'mongodb+srv://guido35723776:Pechoncha90@mongo-51380-rivero.aj8pasu.mongodb.net/ecommerce?retryWrites=true&w=majority', ttl: 1200 }),
+      store: MongoStore.create({ mongoUrl: 'mongodb+srv://guido35723776:Pechoncha90@mongo-51380-rivero.aj8pasu.mongodb.net/ecommerce?retryWrites=true&w=majority', ttl: 1000 }),
       secret: 'un-re-secreto',
       resave: true,
       saveUninitialized: true,
     })
   );
   
-
-
 
 app.use('/api', apiRouter)
 app.use('/', viewRouter)

@@ -1,10 +1,38 @@
 <h1>REGISTER</h1>
-<form action='/auth/register' method='POST'>
-  <input type='text' name='firstName' placeholder='firstName' />
-  <input type='text' name='lastName' placeholder='lastName' />
-  <input type='text' name='email' placeholder='email' />
-  <input type='text' name='age' placeholder='age' />
-  <input type='text' name='password' placeholder='password' />
-  <input type='submit' value='registrarse!' />
-</form>
-<a href='/auth/login'>ya tengo una cuenta!</a>
+
+ <center >
+    <div class="containerlogin">
+      <p id="welcome" class="writename" ></p>
+        <div class="wrapperRegister">
+          <div class="title"><span>Creat your account</span></div>
+
+          <form action="/auth/register" method='POST' name="form">
+            <div class="row">
+              <i class="fas fa-user"></i>
+              <div class="User" id="salida"></div>
+              <input id="usuario" type="text" name='firstName'  placeholder="First Name"  >
+            </div>
+            <div class="row">
+              <i class="fas fa-lock"></i>
+              <input id="contraseña" type="text"  name='lastName' placeholder="Last Name" >
+            </div>
+            <div class="row">
+              <i class="fas fa-lock"></i>
+              <input id="palabraClave" type="text" name='email' placeholder="Email" >
+            </div>
+            <div class="row">
+              <i class="fas fa-lock"></i>
+              <input id="palabraClave" type="text" name='age' placeholder="Age" >
+            </div>
+            <div class="row">
+              <i class="fas fa-lock"></i>
+              <input id="palabraClave" type="text" name="password" placeholder="Password" >
+            </div>
+            <div class="row button">
+              <input id="captured"  type='submit' value= "Join ">
+            </div>
+              <p>Do you already have an account?<a href='/auth/login' id="captured"  class="alogin">Log in</a></p>
+          </form>
+        </div>
+      </div>
+    </center>

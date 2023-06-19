@@ -8,6 +8,41 @@
     box-sizing: border-box;
     font-family: 'Raleway', sans-serif;
 }
+
+
+/*************products********************/
+body {
+    margin: 0;
+    font-family: Roboto,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    font-size: .8125rem;
+    font-weight: 400;
+    line-height: 1.5385;
+    color: #333;
+    text-align: left;
+    background-image: linear-gradient(0deg, #f7f2f7 82%, #97D9E1 100%);
+}
+.mt-50{
+    margin-top: 50px;
+}
+.mb-50{
+    margin-bottom: 50px;
+}
+
+
+.bg-teal-400 { 
+    background-color: #26a69a;
+}
+
+a{
+    text-decoration: none !important;
+}
+
+
+.fa {
+        color: red;
+}
+
+/**********************************************************/
 .toastify {
     background-color: red!important;
     font-style: italic;
@@ -582,4 +617,292 @@ section.body-chat
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: #bbb; 
+}
+
+/***********************LOGINNNN ---********************/
+.containerlogin{
+    max-width: 440px;
+    padding: 0 30px ;
+    margin: 100px  auto;
+    height:245px;
+  }
+  .wrapperlogin{
+    height: 330px;
+    width:100%;
+    background: #fff;
+    border-radius: 5px;
+	box-shadow: 0px 1px   10px #84dbeb;
+  }
+  .wrapperRegister{
+    height: 510px;
+    width:100%;
+    background: #fff;
+    border-radius: 5px;
+	box-shadow: 0px 1px   10px #84dbeb;
+  }
+  
+  .wrapperlogin  .title{
+    height: 90px;
+    background: #97D9E1;
+    border-radius: 5px 5px 0 0;
+    color: #fff;
+    font-size: 30px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .wrapperRegister  .title{
+    height: 90px;
+    background: #97D9E1;
+    border-radius: 5px 5px 0 0;
+    color: #fff;
+    font-size: 30px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .wrapperlogin form{
+    padding: 30px 25px 25px 25px;
+	box-shadow: #4bb8cc;
+	
+  }
+
+  .wrapperRegister form{
+    padding: 30px 25px 25px 25px;
+	box-shadow: #4bb8cc;
+	
+  }
+  .wrapperlogin form .row{
+    height: 45px;
+    margin-bottom: 15px;
+    position: relative;
+  }
+
+  .wrapperRegister form .row{
+    height: 45px;
+    margin-bottom: 15px;
+    position: relative;
+  }
+  .wrapperlogin form .row input{
+    margin-bottom: 5px;
+    height:100%;
+    width:100%;
+    outline: none;
+    padding-left: 60px;
+    border-radius: 8px;
+    border: 1px solid lightgrey;
+    font-size: 16px;
+    transition: all 0.3s ease;
+  }
+
+  .wrapperRegister form .row input{
+    margin-bottom: 5px;
+    height:100%;
+    width:100%;
+    outline: none;
+    padding-left: 60px;
+    border-radius: 8px;
+    border: 1px solid lightgrey;
+    font-size: 16px;
+    transition: all 0.3s ease;
+  }
+
+
+  form .row input:focus{
+    border-color: #11a3e1;
+    box-shadow: inset 0px 0px 2px 2px rgba(26,188,156,0.25);
+  }
+  form .row input::placeholder{
+    color: #999;
+  }
+  .wrapperlogin form .row i{
+    position: absolute;
+    width: 47px;
+    height: 100%;
+    color: #fff;
+    font-size: 18px;
+    background: #97D9E1;
+    border: #97D9E1;
+    border-radius: 7px 0 0 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .wrapperRegister form .row i{
+    position: absolute;
+    width: 47px;
+    height: 100%;
+    color: #fff;
+    font-size: 18px;
+    background: #97D9E1;
+    border: #97D9E1;
+    border-radius: 7px 0 0 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .wrapperlogin form .pass{
+    margin: -8px 0 20px 0;
+  }
+  .wrapperRegister form .pass{
+    margin: -8px 0 20px 0;
+  }
+  .wrapperlogin form .pass a{
+    color: #697270;
+    font-size: 17px;
+    text-decoration: none;
+  }
+  .wrapperRegister form .pass a{
+    color: #697270;
+    font-size: 17px;
+    text-decoration: none;
+  }
+  .wrapperlogin form .pass a:hover{
+    text-decoration: underline;
+  }
+  .wrapperRegister form .pass a:hover{
+    text-decoration: underline;
+  }
+  .wrapperlogin form .button input{
+    color: #fff;
+    font-size: 20px;
+    font-weight: 500;
+    padding-left: 0px;
+    background: #97D9E1;
+    border: 1px solid #f6f9f8;
+    cursor: pointer;
+  }
+  .wrapperRegister form .button input{
+    color: #fff;
+    font-size: 20px;
+    font-weight: 500;
+    padding-left: 0px;
+    background: #97D9E1;
+    border: 1px solid #f6f9f8;
+    cursor: pointer;
+  }
+  form .button input:hover{
+    background: #e0da6e; 
+  }
+  .wrapperlogin form .signup-link{
+    text-align: center;
+    margin-top: 20px;
+    font-size: 17px;
+  }
+  .wrapperRegister form .signup-link{
+    text-align: center;
+    margin-top: 20px;
+    font-size: 17px;
+  }
+  .wrapperlogin form .signup-link a{
+    color:#7f8382;
+    text-decoration: none;
+  }
+  .wrapperRegister form .signup-link a{
+    color:#7f8382;
+    text-decoration: none;
+  }
+
+
+    /*************************************************************/
+  form .signup-link a:hover{
+    text-decoration: underline;
+.box{
+    width: 300px;
+    padding: 30px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background: rgb(153, 17, 17);
+    text-align: center;
+}
+.box h1{
+    color: white;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+.box input [type ="text"],.box input[type ="password"]{
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 3px solid rgb(189, 92, 37);
+    padding: 14px 10px;
+    width: 220px;
+    outline: none;
+    color: rgb(251, 252, 250);
+    border-radius: 64px;
+}
+.box input [type="text"]:focus,.box input[type="password"]:focus{
+    width: 270px;
+    border-color: orange;
+}
+.box input [type="submit"]{
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 3px solid orange;
+    padding: 14px 10px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    cursor: pointer;
+
+}
+.box input[type="submit"] :hover{
+    background: orange;
+
+}
+button {
+    border: none;
+    color: #fff;
+    background-image: linear-gradient(30deg, #1714ca, #547ded);
+    border-radius: 20px;
+    background-size: 100% auto;
+    font-size: 15px;
+    padding: 0.6em 1.5em;
+    margin-bottom: 25px;
+}
+button:hover {
+    background-position: right center;
+    background-size: 200% auto;
+    -webkit-animation: pulse 2s infinite;
+    animation: pulse512 1.5s infinite;
+}
+.buttoncc {
+    border: none;
+    color: #fff;
+    background-image: linear-gradient(30deg, #1714ca, #547ded);
+    border-radius: 20px;
+    background-size: 100% auto;
+    font-size: 15px;
+    padding: 0.6em 1.5em;
+    margin-bottom: 25px;
+}
+.buttoncc:hover {
+    background-position: right center;
+    background-size: 200% auto;
+    -webkit-animation: pulse 2s normal;
+    animation: pulse512 1.5s normal;
+}
+
+@keyframes pulse512 {
+    0% {
+    box-shadow: 0 0 0 0 #05bada66;
+    }
+    70% {
+    box-shadow: 0 0 0 10px rgb(218 103 68 / 0%);
+    }
+    100% {
+    box-shadow: 0 0 0 0 rgb(218 103 68 / 0%);
+    }
+}}
+.alogin {
+	color: #70b3b8;
 }
