@@ -3,6 +3,7 @@ import multer from "multer";
 import { fileURLToPath } from "url";
 import path from "path";
 import { Server } from "socket.io";
+import { MsgModel } from "./dao/models/chats.model.js";
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -23,8 +24,9 @@ export function connectSocket(httpServer) {
   let msgs = [];
 
   socketServer.on("connection", (socket)=> {
-    socket.on("msg_front_to_back", (msg) =>{
-      msgs.unshift(msg);
+    socket.on("msg_front_to_back", async (msg) =>{
+      const msgCreated = await MsgModel.create(msg);
+      const msgs = await MsgModel.find({});
       socketServer.emit("msg_back_to_front", msgs);
     });
   });
