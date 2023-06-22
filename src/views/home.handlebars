@@ -1,144 +1,41 @@
 <h2 class="mt-4 mb-4 ">
-    <strong>Products</strong>
+    <strong>Home</strong>
 </h2>
-<section class="container">
-    <div class="container d-flex flex-wrap justify-content-center align-items-center d-grid gap-2" id="ulContainer">
-        {{#each products as |product|}}
-                <div
-                    class="col-lg-2 col-md-12 mb-4  ">
-                    <!--tamañoa card--->
-                    <div id="{{ product.id }}"  class="card rounded-4">
+<div>
+    <form id="addProductForm">
+    <label for="title">Title:</label>
+    <input type="text" id="title" name="title">
+    <label for="description">Description:</label>
+    <input type="text" id="description" name="description">
+    <label for="price">Price:</label>
+    <input type="number" id="price" name="price">
+    <label for="thumbnail">Thumbnail:</label>
+    <input type="text" id="thumbnail" name="thumbnail">
+    <label for="code">Code:</label>
+    <input type="text" id="code" name="code">
+    <label for="stock">Stock:</label>
+    <input type="number" id="stock" name="stock">
+    <button type="submit">Add Product</button>
+    </form>
 
-                        <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light" data-mdb-ripple-color="light">
-                            <img id="imageRealTime" src="{{ product.thumbnails }}" class="w-100"/>
-                        </div>
-
-                        <div class="card-body">
-                            <a href="" class="text-reset">
-                                <h4 id="titleRealTime" class="card-title mb-3">{{ product.title }}</h4>
-                            </a>
-                            <a href="" class="text-reset">
-                                <p id="descRealTime">{{ product.desc }}</p>
-                            </a>
-                            <h6 id="priceRealTime" class="mb-3">${{ product.price }}</h6>
-                        </div>
-
-                        <div class="d-flex justify-content-center mb-3 align-items-center h-100">
-                            <h5 ><span href="#" class="badge bg-danger ms-3" onclick='eliminateProduct("{{ product.id }}")'><i class="fa-solid fa-trash-can"></i></span>
-                                
-                            </h5>
-                            <h5>
-                                <span class="badge bg-primary ms-3">
-                                    <i class="fa-solid fa-cart-shopping"></i>
-                                </span>
-                            </h5>
-                            <h5>
-                                <span class="badge bg-primary ms-3">
-                                    <i class="fa-solid fa-pen-to-square"></i>
-                                </span>
-                            </h5>
-                        </div>
-
-                    </div>
-                </div>
-            {{/each}}
-        
-    </section>
-
-
-    <script>
-        const formProduct = document.getElementById('formProducts')
-        const divContainer = document.getElementById('ulContainer')
-
-        formProduct.addEventListener('submit', async (event) => {
-            event.preventDefault()
-            event.stopPropagation()
-
-            const inputTitle = document.getElementById('inputTitle').value
-            const inputDescription = document.getElementById('inputDescription').value
-            const inputPrice = document.getElementById('inputPrice').value
-            const inputCode = document.getElementById('inputCode').value
-            const inputStock = document.getElementById('inputStock').value
-            const errorAlert = document.getElementById('errorAlert')
-            const newProduct = {
-                title: inputTitle,
-                desc: inputDescription,
-                price: inputPrice,
-                code: inputCode,
-                stock: inputStock
-            }
-
-
-            const response = await fetch('/api/products', {
-                method: "POST",
-                body: JSON.stringify(newProduct),
-                headers: {
-                    'content-type': 'application/json'
-                }
-            })
-            if (response.ok) {
-                errorAlert.style.color = 'green'
-                errorAlert.innerText = 'Product added with sucess'
-                const data = await response.json()
-
-                let div = document.createElement('div')
-                div.setAttribute('id', data.payload.id)
-                div.innerHTML = `<div class="col-lg-2 col-md-12 mb-4 "><!--tamañoa card--->
-        <div class="card ">
-          <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
-            data-mdb-ripple-color="light">
-            <img id="imageRealTime"   src="${
-                    data.payload.thumbnails
-                }"
-              class="w-100" />
-            <a href="#">
-              <div class="mask">
-                <div class="d-flex justify-content-start align-items-end h-100">
-                  <h5><span href="#" class="btn bg-danger ms-2"   onclick='eliminateProduct("${
-                    data.payload.id
-                }")' ><i class="fa-solid fa-trash-can" ></i></span></h5>
-                  <h5><span class="badge bg-primary ms-2"><i class="fa-solid fa-cart-shopping"></i></span></h5>
-                </div>
-              </div>
-              <div class="hover-overlay">
-                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-              </div>
-            </a>
-          </div>
-          <div class="card-body">
-            <a href="" class="text-reset">
-              <h5 id="titleRealTime" class="card-title mb-3">${
-                    data.payload.title
-                }</h5>
-            </a>
-            <a href="" class="text-reset">
-              <p  id="descRealTime" >${
-                    data.payload.desc
-                }sc}}</p>
-            </a>
-            <h6  id="priceRealTime" class="mb-3">$${
-                    data.payload.price
-                }</h6>
-          </div>
+    <h1>Products</h1>
+    <ul id='productsList'>
+        {{#each products}}
+        <li id={{this.id}}>
+            <div>
+                <p>{{this.title}}
+                -
+                {{this.description}}
+                - ${{this.price}}
+                -
+                {{this.thumbnail}}
+                -
+                {{this.code}}
+                -
+                {{this.stock}}</p>
+            <button onclick="deleteProduct('{{this.id}}')">Delete</button>
         </div>
-      </div>`
-                divContainer.appendChild(div)
-                formProduct.reset()
-            } else {
-                const data = await response.json()
-                errorAlert.style.color = 'red'
-                errorAlert.innerText = data.error
-            }
-        })
-
-        async function eliminateProduct(id) {
-            try {
-                const response = await fetch('/api/products/' + id, {method: "DELETE"})
-
-                const div = document.getElementById(id)
-                div.remove()
-            } catch (err) {
-                return
-            }
-        }
-    </script>
+        </li>
+        {{/each}}
+    </ul>
+</div>

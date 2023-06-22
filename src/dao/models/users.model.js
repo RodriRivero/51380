@@ -1,4 +1,5 @@
 import {Schema, model} from 'mongoose';
+import mongoosePaginate from "mongoose-paginate-v2";
 
 const schema = new Schema({
     firstName: {
@@ -20,17 +21,18 @@ const schema = new Schema({
     password: {
         type: String,
         required: true,
-        max: 100,
+        max: 100
     },
     age: {
-      type: String,
-      required: true,
-      max: 100,
-  },
+        type: String,
+        required: true,
+        max: 100
+    },
     isAdmin: {
         type: Boolean,
         required: true
     }
 });
 
+schema.plugin(mongoosePaginate);
 export const UserModel = model('users', schema);

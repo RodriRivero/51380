@@ -1,8 +1,8 @@
 import express from 'express';
 import ProductService from '../services/products.service.js';
-
-export const productsRouter = express.Router();
+const productsRouter = express.Router();
 const productService = new ProductService();
+
 
 productsRouter.get('/', async (req, res) => {
     try {

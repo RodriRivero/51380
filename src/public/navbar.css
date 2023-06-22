@@ -39,7 +39,7 @@ a{
 
 
 .fa {
-        color: red;
+  color: red;
 }
 
 /**********************************************************/
@@ -65,14 +65,20 @@ body {
 }
 
 li {
-    list-style: none;
+  list-style: none;
 }
 
 a {
-    text-decoration: none;
-    color: #fff;
-    font-size: 1rem;
-    text-shadow: 2px 2px 8px rgb(112, 110, 110);
+  text-decoration: none;
+  color: #fff;
+  font-size: 1rem;
+  text-shadow: 2px 2px 8px rgb(112, 110, 110);
+}
+
+.pagination a {
+ color: #71b7e6;
+margin-left: 850px;
+
 }
 
 a:hover {
@@ -145,6 +151,12 @@ header {
     .dropdown_menu {
         display: block;
     }
+
+    .pagination a {
+      color: #71b7e6;
+     margin-left: 190px;
+     
+     }
 }
 
 

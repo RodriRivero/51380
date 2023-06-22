@@ -3,6 +3,7 @@ import { ProductModel } from '../dao/models/products.model.js';
 
 
 class CartService {
+
     async createOne() {
       const cartCreated = await CartModel.create({});
       return cartCreated;
@@ -34,6 +35,8 @@ class CartService {
         throw error;
       }
     }
+
+
   
     async updateCart(cartId, products) {
       try {
@@ -48,6 +51,8 @@ class CartService {
       }
     }
   
+
+
     async updateProductQuantity(cartId, productId, quantity) {
       try {
 
@@ -95,4 +100,4 @@ class CartService {
     }
   }
   
- export default  CartService;
+  export default  CartService;

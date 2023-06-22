@@ -24,6 +24,20 @@ export function connectSocket(httpServer) {
   let msgs = [];
 
   socketServer.on("connection", (socket)=> {
+
+
+    socket.on('addProduct', async (entries) => {
+      const product = await ProductService.createOne(entries);
+      socketServer.emit('addedProduct', product)
+      })
+
+      socket.on('deleteProduct', async id => {
+      await ProductService.deleteOne(id);
+      socketServer.emit('deletedProduct', id)
+      })
+
+
+
     socket.on("msg_front_to_back", async (msg) =>{
       const msgCreated = await MsgModel.create(msg);
       const msgs = await MsgModel.find({});
