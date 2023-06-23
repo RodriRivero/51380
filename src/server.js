@@ -17,6 +17,7 @@ import { chatRouter } from './router/chat.router.js'
 
 const PORT = 8080
 const app = express()
+
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
@@ -30,7 +31,7 @@ app.use(express.static( 'src/public'));
 
 app.use(
     session({
-      store: MongoStore.create({ mongoUrl: 'mongodb+srv://guido35723776:Pechoncha90@mongo-51380-rivero.aj8pasu.mongodb.net/ecommerce?retryWrites=true&w=majority', ttl: 1000 }),
+      store: MongoStore.create({ mongoUrl: 'mongodb+srv://guido35723776:Pechoncha90@mongo-51380-rivero.aj8pasu.mongodb.net/ecommerce?retryWrites=true&w=majority', ttl: 800 }),
       secret: 'privado',
       resave: true,
       saveUninitialized: true,

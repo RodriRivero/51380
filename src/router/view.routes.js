@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
     try {
         const products = await ProductManager.getProducts()
         res.status(200).render('home', {
-            name: ' lista de Productos',
+            name: ' Home',
             products
         })
     } catch (err) {

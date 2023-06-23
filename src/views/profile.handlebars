@@ -1,3 +1,52 @@
+
+
+
+
+<header>
+<div class="navbar">
+    <div class="logo"><a href="#"> Rodridev</a></div>
+    <ul class="links">
+        <li><a href="/realtimeproducts">Admin</a></li>
+        <li><a href="http://localhost:8080/products">Products</a></li>
+        <li><a href="#">Cart</a></li>
+        <li><a href="/chat">Chat</a></li>
+        <li><a href="/auth/logout">Logout</a></li>
+    </ul>   
+
+    <a href="#" class="action_btn"><i class="fa-solid fa-star" style="color: #d8ca6f;"></i> &nbsp;<i class="fa-solid fa-star" style="color: #d8ca6f;"></i>&nbsp;<i class="fa-solid fa-star" style="color: #d8ca6f;"></i></a>
+
+    <div class="toggle_btn">
+    <i class="fa-solid fa-bars-staggered"></i>   
+    </div>
+    </div>
+
+
+<div class="dropdown_menu ">
+        <li><a href="/realtimeproducts">Admin</a></li>
+        <li><a href="http://localhost:8080/products">Products</a></li>
+        <li><a href="services">Cart</a></li>
+        <li><a href="/chat">Chat</a></li>
+        <li><a href="/auth/logout">Logout</a></li>
+        <li><a href="#" class="action_btn"><i class="fa-solid fa-star" style="color: #d8ca6f;"></i> &nbsp;<i class="fa-solid fa-star" style="color: #d8ca6f;"></i>&nbsp;<i class="fa-solid fa-star" style="color: #d8ca6f;"></i></a></li>
+</div>
+</header>
+
+
+<script>
+    const toggleBtn = document.querySelector('.toggle_btn')
+    const toggleBtnIcon = document.querySelector('.toggle_btn i')
+    const dropDownMenu = document.querySelector('.dropdown_menu')
+
+toggleBtn.onclick = function () {
+    dropDownMenu.classList.toggle('open')
+    const isOpen = dropDownMenu.classList.contains('open')
+
+    toggleBtnIcon.classList = isOpen 
+    ? 'fa-solid fa-xmark'
+    :'fa-solid fa-bars-staggered'
+}
+
+</script>
 <h1>Perfil del usuario </h1>
 
 email:

@@ -5,6 +5,9 @@ import path from "path";
 import { Server } from "socket.io";
 import { MsgModel } from "./dao/models/chats.model.js";
 
+import ProductService  from './services/products.service.js'
+
+
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'src/public/thumbnails');

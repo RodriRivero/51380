@@ -1,41 +1,52 @@
+
+
+
+
+<header>
+<div class="navbar">
+    <div class="logo"><a href="#"> Rodridev</a></div>
+    <ul class="links">
+        <li><a href="/realtimeproducts">Admin</a></li>
+        <li><a href="http://localhost:8080/products">Products</a></li>
+        <li><a href="#">Cart</a></li>
+        <li><a href="/chat">Chat</a></li>
+        <li><a href="/auth/logout">Logout</a></li>
+    </ul>   
+
+    <a href="#" class="action_btn"><i class="fa-solid fa-star" style="color: #d8ca6f;"></i> &nbsp;<i class="fa-solid fa-star" style="color: #d8ca6f;"></i>&nbsp;<i class="fa-solid fa-star" style="color: #d8ca6f;"></i></a>
+
+    <div class="toggle_btn">
+    <i class="fa-solid fa-bars-staggered"></i>   
+    </div>
+    </div>
+
+
+<div class="dropdown_menu ">
+        <li><a href="/realtimeproducts">Admin</a></li>
+        <li><a href="http://localhost:8080/products">Products</a></li>
+        <li><a href="services">Cart</a></li>
+        <li><a href="/chat">Chat</a></li>
+        <li><a href="/auth/logout">Logout</a></li>
+        <li><a href="#" class="action_btn"><i class="fa-solid fa-star" style="color: #d8ca6f;"></i> &nbsp;<i class="fa-solid fa-star" style="color: #d8ca6f;"></i>&nbsp;<i class="fa-solid fa-star" style="color: #d8ca6f;"></i></a></li>
+</div>
+</header>
+
+
+<script>
+    const toggleBtn = document.querySelector('.toggle_btn')
+    const toggleBtnIcon = document.querySelector('.toggle_btn i')
+    const dropDownMenu = document.querySelector('.dropdown_menu')
+
+toggleBtn.onclick = function () {
+    dropDownMenu.classList.toggle('open')
+    const isOpen = dropDownMenu.classList.contains('open')
+
+    toggleBtnIcon.classList = isOpen 
+    ? 'fa-solid fa-xmark'
+    :'fa-solid fa-bars-staggered'
+}
+
+</script>
 <h2 class="mt-4 mb-4 ">
     <strong>Home</strong>
 </h2>
-<div>
-    <form id="addProductForm">
-    <label for="title">Title:</label>
-    <input type="text" id="title" name="title">
-    <label for="description">Description:</label>
-    <input type="text" id="description" name="description">
-    <label for="price">Price:</label>
-    <input type="number" id="price" name="price">
-    <label for="thumbnail">Thumbnail:</label>
-    <input type="text" id="thumbnail" name="thumbnail">
-    <label for="code">Code:</label>
-    <input type="text" id="code" name="code">
-    <label for="stock">Stock:</label>
-    <input type="number" id="stock" name="stock">
-    <button type="submit">Add Product</button>
-    </form>
-
-    <h1>Products</h1>
-    <ul id='productsList'>
-        {{#each products}}
-        <li id={{this.id}}>
-            <div>
-                <p>{{this.title}}
-                -
-                {{this.description}}
-                - ${{this.price}}
-                -
-                {{this.thumbnail}}
-                -
-                {{this.code}}
-                -
-                {{this.stock}}</p>
-            <button onclick="deleteProduct('{{this.id}}')">Delete</button>
-        </div>
-        </li>
-        {{/each}}
-    </ul>
-</div>
