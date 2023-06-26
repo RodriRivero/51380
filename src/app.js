@@ -2,7 +2,7 @@ import { __dirname, connectMongo, connectSocket } from './utils.js'
 import apiRouter from "./router/api.routes.js"
 import express from 'express'
 import handlebars from 'express-handlebars'
-import { initSockets } from './socket/socketServer.js'
+
 import path from 'path';
 import viewRouter from './router/view.routes.js'
 import session from 'express-session';
@@ -13,6 +13,7 @@ import { authRouter } from './router/auth.router.js';
 import MongoStore from 'connect-mongo';
 import { usersRouter } from './router/users.router.js'
 import { chatRouter } from './router/chat.router.js'
+import { passport } from "./middlewares/passport-local.js";
 
 
 const PORT = 8080
@@ -38,9 +39,11 @@ app.use(
     })
   );
   
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/api', apiRouter)
-app.use('/', viewRouter)
+app.use('/api', viewRouter)
 
 const httpServer = app.listen(PORT, () => {
     console.log(`Server up and running on port http://localhost:${PORT}`)
@@ -48,13 +51,14 @@ const httpServer = app.listen(PORT, () => {
 // SOCKET IO
 //Rutas: SOCKETS
 app.use("/chat",chatRouter);
+app.use("/realtimeproducts",chatRouter);
 app.use('/api/products', productsRouter);
 app.use('/api/carts', cartsRouter);
 app.use('/', viewsRouter);
 app.use('/auth', authRouter)
 app.use('/api/users', usersRouter);
 
-initSockets(httpServer)
+
 
 connectMongo();
 connectSocket(httpServer) 

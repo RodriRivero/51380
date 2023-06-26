@@ -1,9 +1,9 @@
 import {Router} from 'express'
 import ProductManager from '../dao/filesystem/ProductManager.js'
 
-const router = Router()
+const realRouter = Router()
 
-router.get('/realtimeproducts', async (req, res) => {
+realRouter.get('/realtimeproducts', async (req, res) => {
     try {
         const products = await ProductManager.getProducts()
         res.status(200).render('realTimeProducts', {
@@ -15,4 +15,4 @@ router.get('/realtimeproducts', async (req, res) => {
     }
 })
 
-export default router
+export default realRouter
