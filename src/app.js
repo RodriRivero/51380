@@ -13,7 +13,7 @@ import { authRouter } from './router/auth.router.js';
 import MongoStore from 'connect-mongo';
 import { usersRouter } from './router/users.router.js'
 import { chatRouter } from './router/chat.router.js'
-import { passport } from "./middlewares/passport-local.js";
+//import { passport } from "./middlewares/passport-local.js";
 
 
 const PORT = 8080
@@ -39,8 +39,8 @@ app.use(
     })
   );
   
-app.use(passport.initialize());
-app.use(passport.session());
+//app.use(passport.initialize());
+//app.use(passport.session());
 
 app.use('/api', apiRouter)
 app.use('/api', viewRouter)
