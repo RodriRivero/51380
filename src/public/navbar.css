@@ -39,22 +39,32 @@ a{
 
 
 .fa {
-  color: rgb(204, 189, 55);
+  color: rgb(240, 230, 88);
 }
 
 /**********************************************************/
-.toastify {
-    background-color: red!important;
-    font-style: italic;
-    font-size: 25px;
-  }
+
   strong{
     color: rgb(240, 230, 88);
-    text-shadow: 2px 2px 8px rgb(112, 110, 110);
+    text-shadow: 2px 2px 19px rgb(121, 121, 121);
 
   }
   h1{
     margin-top: 70px;
+  }
+  h2{
+    text-shadow: 2px 2px 19px rgb(121, 121, 121);
+
+  }
+  h3{
+    color: #71b7e6;
+  }
+  h4{
+    color: #71b7e6;
+  }
+  h6{
+    color: #71b7e6;
+    text-shadow: 2px 2px 19px rgb(121, 121, 121);
   }
 
 
@@ -78,6 +88,9 @@ a {
   font-size: 1rem;
   text-shadow: 2px 2px 8px rgb(112, 110, 110);
 }
+.list-inline-item a {
+  color: #26a69a;
+}
 
 .pagination a {
  color: #71b7e6;
@@ -87,7 +100,7 @@ margin-left: 850px;
 
 a:hover {
     color: rgb(220, 198, 112);
-    text-shadow: 2px 5px 15px rgb(247, 244, 244);
+    text-shadow: 2px 2px 8px rgb(112, 110, 110);
 }
 /*HEADER****************************************/
 header {
@@ -261,6 +274,11 @@ input {
 }
 
 /*********************************chat**********************************************************************/
+
+
+
+
+/******************************************************************************************/
 
 
 
@@ -454,6 +472,15 @@ input {
     padding-left: 0px;
     background: #0d0d0e;
     border: 1px solid #f6f9f8;
+    cursor: pointer;
+  }
+  #buttonadd{
+    color: #fff;
+    font-size: 15px;
+    font-weight: 500;
+    padding-left: 0px;
+    background: #97D9E1;
+    border: 3px solid #f6f9f8;
     cursor: pointer;
   }
 

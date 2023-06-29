@@ -41,8 +41,11 @@ toggleBtn.onclick = function () {
     ? 'fa-solid fa-xmark'
     :'fa-solid fa-bars-staggered'
 }
-
 </script>
+
+
+
+
 
 
 
@@ -71,7 +74,7 @@ let correoDelUsuario = '';
 
 async function pedirEmail() {
   const { value: nombre } = await Swal.fire({
-    title: 'Enter your mail',
+    title: 'Enter your name',
     input: 'text',
     inputLabel: 'Your mail',
     inputValue: '',
@@ -114,4 +117,8 @@ socket.on('msg_back_to_front', (msgs) => {
   });
   const divMsgs = document.getElementById('div-msgs');
   divMsgs.innerHTML = msgsFormateados;
-});</script>
+});
+
+</script>
+
+
