@@ -1,7 +1,7 @@
 import express from 'express';
 import { UserModel } from '../dao/models/users.model.js';
-
 import { isAdmin, isUser } from '../middlewares/auth.js';
+import passport from "passport";
 
 export const authRouter = express.Router();
 
@@ -118,3 +118,57 @@ authRouter.post('/register', async (req, res) => {
     return res.status(400).render('error', { error: 'no se pudo crear el usuario. Intente con otro mail.' });
   }
 });
+
+authRouter.post(
+  "/register",
+  passport.authenticate("register", {
+    successRedirect: "/auth/login",
+    failureRedirect: "/error",
+    failureFlash: true, // Habilitar mensajes flash
+  })
+);
+
+// login post
+authRouter.post(
+  "/login",
+  passport.authenticate("login", {
+    successRedirect: "/home",
+    failureRedirect: "/error",
+    failureFlash: true, // Habilitar mensajes flash
+  })
+);
+
+authRouter.get("/logout", (req, res) => {
+  // req.session.destroy(() => {
+  //   res.render("login");
+  // });
+  // Hace logout y elimina la sesión del usuario autenticado
+  console.log("req.logout", req.logout);
+  req.logout(function (err) {
+    if (err) {
+      // Maneja el error de logout
+      console.error(err);
+      // Redirige a una página de error o manejo de errores
+      return res.redirect("/error");
+    }
+
+    // Redirige al usuario a la ruta de autenticación
+    res.render("login");
+  });
+});
+
+/** rutas de auth con github */
+authRouter.get(
+  "/github",
+  passport.authenticate("github", { scope: ["user:email"] })
+);
+
+authRouter.get(
+  "/github/callback",
+  passport.authenticate("github", { failureRedirect: "/error" }),
+  (req, res) => {
+    // Redirige al usuario a la página deseada después de iniciar sesión correctamente
+    res.redirect("/");
+  }
+);
+export default authRouter;
