@@ -96,7 +96,7 @@ toggleBtn.onclick = function () {
 
                                     <ul class="list-inline list-inline-dotted mb-0">
                                         <li class="list-inline-item">Stock:<a href="#" data-abc="true">{{this.stock}}</a></li>
-                                        <li class="list-inline-item">View <a href="products/{{this._id}}">{{this._id}}</a></li>
+                                        <li class="list-inline-item">View <a href="products/{{this._id}}">Details</a></li>
                                     </ul>
                                 </div>
 
@@ -114,7 +114,7 @@ toggleBtn.onclick = function () {
 
                                     <div >availability:{{this.availability}}</div>
 
-                                    <button class="btn custom-button rounded-4" id="buttonForm" onclick="putIntoCart('{{this._id}}')" > Add tocart{{this._id}}</button>
+                                    <button class="btn custom-button rounded-4" id="buttonForm" onclick="putIntoCart('{{this._id}}')"> Add to cart</button>
                                 </div>
                             </div>
                         </div>

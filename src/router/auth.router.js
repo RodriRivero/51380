@@ -9,7 +9,8 @@ export const authRouter = express.Router();
 
 /***************************************************************** */
 authRouter.get('/profile', isUser, (req, res) => {
-  const user = {email: req.session.email, isAdmin: req.session.isAdmin};
+  const user = {email: req.session.email, isAdmin: req.session.isAdmin, firstName: req.session.firstName, 
+    lastName: req.session.lastName };
   return res.render('profile', {user: user});
 });
 
@@ -79,6 +80,8 @@ authRouter.post('/login', async (req, res) => {
       if (foundUser && foundUser.password === password) {
           req.session.email = foundUser.email;
           req.session.isAdmin = foundUser.isAdmin;
+          req.session.firstName = foundUser.firstName;
+          req.session.lastName = foundUser.lastName;
           return req.session.save(() => {
               return res.redirect('/products');
           });
@@ -123,8 +126,7 @@ authRouter.post(
   "/register",
   passport.authenticate("register", {
     successRedirect: "/auth/login",
-    failureRedirect: "/error",
-    failureFlash: true, // Habilitar mensajes flash
+    failureRedirect: "/error"
   })
 );
 
@@ -133,8 +135,7 @@ authRouter.post(
   "/login",
   passport.authenticate("login", {
     successRedirect: "/home",
-    failureRedirect: "/error",
-    failureFlash: true, // Habilitar mensajes flash
+    failureRedirect: "/error"
   })
 );
 

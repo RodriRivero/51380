@@ -83,8 +83,9 @@ passport.use(
   )
 );
 
+
 passport.serializeUser((user, done) => {
-  done(null, user.id); 
+  done(null, user.id); // _id de mongo
 });
 
 passport.deserializeUser(async (id, done) => {
