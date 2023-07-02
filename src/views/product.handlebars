@@ -1,14 +1,18 @@
-<div>
-  
-  <h1>
-    {{product.title}}
-  </h1>
-  <h2>
-    {{product.price}}
-  </h2>
+<h1><strong>Product</strong></h1>
 
-  <h2>
-    Category:
-    {{product.category}}
-  </h2>
-</div>
+<div class='container-fluid'>
+        <div class="card mx-auto col-md-3 col-10 mt-5 rounded-3">
+            <img class='md-auto img-thumbnail rounded-5 mt-2'
+                src="https://i.ytimg.com/vi/YkCz8d3xxAM/maxresdefault.jpg"
+                width="auto" height="auto"/>
+            <div class="card-body text-center mx-auto">
+                <div class='cvp '>
+                    <h5 class="card-title font-weight-bold">{{product.title}}</h5>
+                    <p class="card-text ">$ {{product.price}}</p>
+                    <a href="#" class="btn details px-auto rounded-4">{{product.category}}</a><br />
+                    <a href="#" class="btn cart px-auto rounded-4">ADD TO CART</a>
+                </div>
+            </div>
+        </div>
+
+    </div>

@@ -20,6 +20,7 @@ formulario para agregar productos
 ![](src/public/thumbnails/loginecommerce.png) 
 ![](src/public/thumbnails/autenticateecommerce.png)
 ![](src/public/thumbnails/productsecommerce.png)
+![](src/public/thumbnails/productecommerce.png)
 ![](src/public/thumbnails/chatecommerce.png)
 
 
