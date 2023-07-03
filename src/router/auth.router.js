@@ -2,6 +2,7 @@ import express from 'express';
 import { UserModel } from '../dao/models/users.model.js';
 import { isAdmin, isUser } from '../middlewares/auth.js';
 import passport from "passport";
+import Swal from 'sweetalert2'
 
 export const authRouter = express.Router();
 
@@ -44,7 +45,8 @@ authRouter.get('/login', (req, res) => {
 /**************************************agrega */
 authRouter.get('/products', (req, res) => {
   try{
-      const user = UserModel.findOne({email: req.session.email});
+      const user = UserModel.findOne({email: req.session.email, firstName: req.session.firstName, 
+        lastName: req.session.lastName});
       if (user) {
           const userData = {
               firstName: user.firstName,
@@ -82,12 +84,19 @@ authRouter.post('/login', async (req, res) => {
           req.session.isAdmin = foundUser.isAdmin;
           req.session.firstName = foundUser.firstName;
           req.session.lastName = foundUser.lastName;
+
+
           return req.session.save(() => {
               return res.redirect('/products');
           });
       }else{
+
+
+
           return res.status(401).render('error', {error:'wrong email or password'})
       }
+
+      
   }catch(error){
       console.error(error);
       res.status(500).json({status: 'error', message: 'Internal server error'});
