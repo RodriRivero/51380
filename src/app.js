@@ -13,6 +13,7 @@ import MongoStore from 'connect-mongo';
 import { usersRouter } from './router/users.router.js'
 import { chatRouter } from './router/chat.router.js'
 import { passport } from './auth/passport-local.js'
+import realRouter from './router/realtime.routes.js';
 
 
 
@@ -50,7 +51,7 @@ const httpServer = app.listen(PORT, () => {
 })
 
 app.use("/chat",chatRouter);
-app.use("/realtimeproducts",chatRouter);
+app.use("/realtimeproducts",realRouter);
 app.use('/api/products', productsRouter);
 app.use('/api/carts', cartsRouter);
 app.use('/', viewsRouter);

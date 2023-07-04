@@ -2,7 +2,7 @@ import express from 'express';
 import { UserModel } from '../dao/models/users.model.js';
 import { isAdmin, isUser } from '../middlewares/auth.js';
 import passport from "passport";
-import Swal from 'sweetalert2'
+
 
 export const authRouter = express.Router();
 
@@ -43,6 +43,7 @@ authRouter.get('/login', (req, res) => {
   return res.render('login', {});
 });
 /**************************************agrega */
+
 authRouter.get('/products', (req, res) => {
   try{
       const user = UserModel.findOne({email: req.session.email, firstName: req.session.firstName, 
@@ -57,7 +58,7 @@ authRouter.get('/products', (req, res) => {
           };
           return res.render('products', { user: userData });
       } else {
-          return res.render('products', { user: null });
+          /*return res.render('products', { user: null });*/
       }
   } catch (error) {
       console.error(error);
@@ -149,25 +150,22 @@ authRouter.post(
 );
 
 authRouter.get("/logout", (req, res) => {
-  // req.session.destroy(() => {
-  //   res.render("login");
-  // });
-  // Hace logout y elimina la sesión del usuario autenticado
+
   console.log("req.logout", req.logout);
   req.logout(function (err) {
     if (err) {
-      // Maneja el error de logout
+
       console.error(err);
-      // Redirige a una página de error o manejo de errores
+
       return res.redirect("/error");
     }
 
-    // Redirige al usuario a la ruta de autenticación
+
     res.render("login");
   });
 });
 
-/** rutas de auth con github */
+
 authRouter.get(
   "/github",
   passport.authenticate("github", { scope: ["user:email"] })
@@ -177,7 +175,7 @@ authRouter.get(
   "/github/callback",
   passport.authenticate("github", { failureRedirect: "/error" }),
   (req, res) => {
-    // Redirige al usuario a la página deseada después de iniciar sesión correctamente
+
     res.redirect("/");
   }
 );

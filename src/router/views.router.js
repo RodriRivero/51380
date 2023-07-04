@@ -2,6 +2,7 @@ import express from "express";
 import ProductService from "../services/products.service.js";
 import CartService from "../services/carts.service.js";
 import { ProductModel } from "../dao/models/products.model.js";
+import { isUser } from "../middlewares/auth.js";
 
 const cartService = new CartService();
 const productService = new ProductService();
@@ -38,7 +39,8 @@ viewsRouter.get('/realtimeproducts', async (req, res) => {
     }
 });
 
-viewsRouter.get('/products', async (req, res) => {
+viewsRouter.get('/products', isUser, async (req, res) => {
+    const user = {email: req.session.email, isAdmin: req.session.isAdmin, firstName: req.session.firstName, lastName: req.session.lastName};
     try {
         const {
             limit = 10,
@@ -77,6 +79,7 @@ viewsRouter.get('/products', async (req, res) => {
             };
         });
         return res.render('products', {
+            user:user,
             products: productsSimplified,
             totalPages,
             prevPage,
@@ -86,7 +89,7 @@ viewsRouter.get('/products', async (req, res) => {
             hasNextPage,
             prevLink: prevLink ?. substring(4) || "",
             nextLink: nextLink ?. substring(4) || ""
-        });
+        }, );
     } catch (error) {
         return res.status(500).json({status: 'error', message: 'Error in server'});
     }
