@@ -4,7 +4,6 @@ import { fileURLToPath } from "url";
 import path from "path";
 import { Server } from "socket.io";
 import { MsgModel } from "./dao/models/chats.model.js";
-
 import ProductService  from './services/products.service.js'
 
 
@@ -50,10 +49,10 @@ export function connectSocket(httpServer) {
 }
 
 
+
 export async function connectMongo() {
   try {
     await connect(
-      /* PONER TU STRING ENTERO ACA */
       "mongodb+srv://guido35723776:Pechoncha90@mongo-51380-rivero.aj8pasu.mongodb.net/ecommerce?retryWrites=true&w=majority"
     );
     console.log("plug to mongo!");

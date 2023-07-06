@@ -1,9 +1,4 @@
 
-
-
-
-
-
 ///----------FETCH CART-------------------------------------------------------
 
 let cartId = localStorage.getItem("cart-id");

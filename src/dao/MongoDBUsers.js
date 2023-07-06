@@ -1,5 +1,5 @@
 import MongoClass from "./MongoClass.js";
-import { usersSchema } from "./models/UsersSchema.js";
+import { usersSchema } from "./UsersSchema.js";
 
 export class MongoDBUsers extends MongoClass {
   constructor() {
