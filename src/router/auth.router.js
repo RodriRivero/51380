@@ -71,7 +71,7 @@ authRouter.post('/login', async (req, res) => {
   try{
       const {email, password} = req.body;
       if (!email || !password) {
-          return res.status(400).render('error', {error: 'email and password required'});
+          return res.status(400).render('error3', {error3: 'email and password required'});
       }
       const isAdmin = email === 'adminCoder@coder.com' && password === 'adminCod3r123';
       if (isAdmin) {
@@ -94,7 +94,7 @@ authRouter.post('/login', async (req, res) => {
 
 
 
-          return res.status(401).render('error', {error:'wrong email or password'})
+          return res.status(401).render('error3', {error3:'wrong email or password'})
       }
 
       
@@ -116,7 +116,7 @@ authRouter.get('/register', (req, res) => {
 authRouter.post('/register', async (req, res) => {
   const { email, password, firstName, lastName, age } = req.body;
   if (!email || !password || !firstName || !lastName || !age) {
-    return res.status(400).render('error', { error: 'ponga bien toooodoo cheee!!' });
+    return res.status(400).render('error', { error: 'uh ... me cag#%$%..' });
   }
 
   const isAdmin = email === 'adminCoder@coder.com' && password === 'adminCod3r123';
@@ -125,10 +125,10 @@ authRouter.post('/register', async (req, res) => {
     req.session.email = email;
     req.session.isAdmin = isAdmin;
 
-    return res.redirect('/auth/profile');
+    return res.redirect('/auth/login');
   } catch (e) {
     console.log(e);
-    return res.status(400).render('error', { error: 'no se pudo crear el usuario. Intente con otro mail.' });
+    return res.status(400).render('error2', { error2: 'no se pudo crear el usuario. Intente con otro mail.' });
   }
 });
 

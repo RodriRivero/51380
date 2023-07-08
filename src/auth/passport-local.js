@@ -27,6 +27,7 @@ passport.use(
     async (req, username, password, done) => {
       const usuarioSaved = await db.getUserByUsername({ username });
       if (usuarioSaved) {
+
         req.flash(
           "errorMessage",
           "El usuario ya existe en nuestra Base de datos. Por favor, elija otro nombre de usuario."
@@ -129,3 +130,4 @@ passport.use(
 );
 
 export { passport, isAuth };
+
