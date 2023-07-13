@@ -28,11 +28,9 @@ passport.use(
       const usuarioSaved = await db.getUserByUsername({ username });
       if (usuarioSaved) {
 
-        req.flash(
-          "errorMessage",
           "El usuario ya existe en nuestra Base de datos. Por favor, elija otro nombre de usuario."
-        );
-        return done(null, false);
+
+          return done(null, false);
       } else {
         const hashPass = await encryptPassword(password);
         const newUser = {
@@ -49,37 +47,45 @@ passport.use(
 
 passport.use(
   "login",
-  new localStrategy(
+  new LocalStrategy(
     {
-      usernameField: "username",
+      usernameField: "email",
       passwordField: "password",
-      passReqToCallback: true, 
+      passReqToCallback: true,
     },
     async (req, username, password, done) => {
+      try {
+        const { email, password } = req.body;
+        if (!email || !password) {
+          req.flash("error", "Por favor indique su email y password.");
+          return done(null, false);
+        }
 
+        const user = await UserModel.findOne({ email: username });
+        if (!user) {
+          req.flash("error", "Por favor indique su email y password.");
+          return done(null, false);
+        }
 
-      const usuarioSaved = await db.getUserByUsername({ username });
-      if (!usuarioSaved) {
-        req.flash(
-          "errorMessage",
-          "El usuario ingresado no existe. Por favor, regístrese."
-        );
-        return done(null, false);
+        if (!isValidPassword(password, user.password)) {
+          req.flash(
+            "error",
+            "Por favor indique un email o password correcto."
+          );
+          return done(null, false);
+        }
+
+        req.session.email = user.email;
+        req.session.role = user.role;
+        req.session.first_name = user.first_name;
+        req.session.last_name = user.last_name;
+        req.session.age = user.age;
+        req.session.cartID = user.cartID;
+
+        return done(null, user);
+      } catch (error) {
+        return done(new Error(error));
       }
-      const isTruePassword = await comparePassword(
-        password,
-        usuarioSaved.password
-      );
-      if (!isTruePassword) {
-        req.flash(
-          "errorMessage",
-          "La contraseña ingresada es incorrecta. Por favor, intente nuevamente."
-        );
-        return done(null, false);
-      }
-      req.session.username = usuarioSaved.username;
-
-      return done(null, usuarioSaved);
     }
   )
 );
@@ -104,10 +110,13 @@ function isAuth(req, res, next) {
   res.redirect("/auth/login");
 }
 
+
+
 /** AUTHENTICATION - GITHUB */
 passport.use(
   new githubStrategy(
     {
+   
       clientID: '6eecce92dba6280372f0',
       clientSecret: '18c53173b60dd85f804d4ed3e8f9c0a95871e3de',
       callbackURL: "http://localhost:8080/auth/github/callback",
@@ -128,6 +137,7 @@ passport.use(
     }
   )
 );
+
 
 export { passport, isAuth };
 
