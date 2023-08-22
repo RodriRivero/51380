@@ -6,6 +6,7 @@ import { Strategy as LocalStrategy } from "passport-local";
 import { Strategy as GitHubStrategy } from "passport-github2";
 import MongoDBUsers from "../dao/MongoDBUsers.js";
 import { encryptPassword, comparePassword } from "../config/bcrypt.js";
+import CartService from "../services/carts.service.js";
 const db = new MongoDBUsers();
 
 const localStrategy = LocalStrategy;
@@ -20,28 +21,48 @@ passport.use(
   new localStrategy(
     {
  
-      usernameField: "username",
+      usernameField: "email",
       passwordField: "password",
       passReqToCallback: true, 
     },
     async (req, username, password, done) => {
-      const usuarioSaved = await db.getUserByUsername({ username });
+     try{
+      const{  firstName,lastName,age}=req.body
+      console.log("body",req.body);
+       const usuarioSaved = await db.getUserByEmail( username );
+       console.log("usuarioSaved",usuarioSaved);
       if (usuarioSaved) {
 
-          "El usuario ya existe en nuestra Base de datos. Por favor, elija otro nombre de usuario."
-
+        req.flash(  "error","El usuario ya existe en nuestra Base de datos. Por favor, elija otro nombre de usuario.")
+console.log("ya existe ese usuario");
           return done(null, false);
       } else {
         const hashPass = await encryptPassword(password);
+        console.log("pass",hashPass)
+        const cartService = new CartService
+        const newCart = await cartService.createOne();
+        const cartId = newCart._id.toString();
+        
         const newUser = {
-          username: username,
-          password: hashPass,
-        };
+          firstName,
+          lastName,
+          email:username,
+          password:hashPass,
+          age,
+          cartId}
+       
+        if(username === 'adminCoder@coder.com' && password === 'adminCod3r123'){
+          newUser.role= "admin"
+        }
         const response = await db.create(newUser);
         console.log("Nuevo usuario registrado: ", response);
         return done(null, response);
       }
+    }catch(error){
+      console.log(error);
+      return done(error)
     }
+     }
   )
 );
 
@@ -55,33 +76,26 @@ passport.use(
     },
     async (req, username, password, done) => {
       try {
-        const { email, password } = req.body;
-        if (!email || !password) {
+        // const { email, password } = req.body;
+        if (!username || !password) {
           req.flash("error", "Por favor indique su email y password.");
           return done(null, false);
         }
 
-        const user = await UserModel.findOne({ email: username });
+        const user = await db.getUserByEmail( username );
         if (!user) {
           req.flash("error", "Por favor indique su email y password.");
           return done(null, false);
         }
 
-        if (!isValidPassword(password, user.password)) {
+        if (!comparePassword(password, user.password)) {
           req.flash(
             "error",
             "Por favor indique un email o password correcto."
           );
           return done(null, false);
-        }
-
-        req.session.email = user.email;
-        req.session.role = user.role;
-        req.session.first_name = user.first_name;
-        req.session.last_name = user.last_name;
-        req.session.age = user.age;
-        req.session.cartID = user.cartID;
-
+          }
+          console.log("sesion",user)
         return done(null, user);
       } catch (error) {
         return done(new Error(error));
@@ -102,7 +116,7 @@ passport.deserializeUser(async (id, done) => {
 
 
 function isAuth(req, res, next) {
-
+  console.log("req.isAuthenticated()",req.isAuthenticated());
   if (req.isAuthenticated()) {
 
     return next();
@@ -122,17 +136,32 @@ passport.use(
       callbackURL: "http://localhost:8080/auth/github/callback",
     },
     async (accessToken, refreshToken, profile, done) => {
-
-      const user = {
-        username: profile.username,
-        password: null, 
-      };
-      const userSaved = await db.getUserByUsername({ username: user.username });
+      try{
+        const email= profile.email || `${profile._json.login}@github.com.ar` 
+      const userSaved = await db.getUserByEmail(email)
+      console.log(userSaved);
       if (userSaved) {
         return done(null, userSaved);
       } else {
+      const cartService = new CartService
+      const newCart = await cartService.createOne();
+      const cartId = newCart._id.toString();
+      const hashPass = await encryptPassword("passwordGitHub");
+      const user = {
+        firstName:profile._json.name ||profile._json.login|| 'NoName',
+        lastName:profile._json.login|| 'NoName' ,
+        email:email,
+        password:hashPass,
+        age: 18,
+        cartID :cartId  
+      };
+      
         const response = await db.create(user);
         return done(null, response);
+      }
+    }catch(error){
+        console.log(error);
+        return done(error);
       }
     }
   )
@@ -140,4 +169,5 @@ passport.use(
 
 
 export { passport, isAuth };
+
 
